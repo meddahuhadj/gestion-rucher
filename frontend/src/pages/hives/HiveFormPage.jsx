@@ -73,15 +73,15 @@ export const HiveFormPage = () => {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
+      <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200">
         <ArrowRight className="h-4 w-4" /> {t('common.back')}
       </button>
 
-      <h1 className="text-2xl font-bold text-stone-800">{isEdit ? t('hives.edit') : t('hives.add')} 🐝</h1>
+      <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">{isEdit ? t('hives.edit') : t('hives.add')} 🐝</h1>
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold text-stone-800">{t('hives.number')}</h2>
+          <h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('hives.number')}</h2>
         </CardHeader>
         <CardBody className="space-y-4">
           <Select value={form.status} onChange={(e) => update('status', e.target.value)} label={t('hives.status')}>
@@ -98,7 +98,7 @@ export const HiveFormPage = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">{t('hives.name')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('hives.name')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input label={t('hives.name')} value={form.name} onChange={(e) => update('name', e.target.value)} placeholder={t('optional')} />
@@ -110,7 +110,7 @@ export const HiveFormPage = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">👑 {t('hives.queenPresent')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">👑 {t('hives.queenPresent')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <div className="flex gap-3">
             <Button type="button" variant={form.queenPresent ? 'primary' : 'secondary'} onClick={() => update('queenPresent', true)}>
@@ -128,7 +128,7 @@ export const HiveFormPage = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">{t('hives.notes')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('hives.notes')}</h2></CardHeader>
         <CardBody>
           <TextArea value={form.notes} onChange={(e) => update('notes', e.target.value)} rows={3} />
         </CardBody>

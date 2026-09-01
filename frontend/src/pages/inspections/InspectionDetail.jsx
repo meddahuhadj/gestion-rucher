@@ -34,16 +34,16 @@ export const InspectionDetail = () => {
   if (!insp) return <EmptyState />;
 
   const Field = ({ label, value }) => (
-    <div className="py-2 flex justify-between gap-4 border-b border-stone-50">
-      <span className="text-sm text-stone-500">{label}</span>
-      <span className="text-sm font-medium text-stone-800">{value || '—'}</span>
+    <div className="py-2 flex justify-between gap-4 border-b border-stone-50 dark:border-stone-800">
+      <span className="text-sm text-stone-500 dark:text-stone-400">{label}</span>
+      <span className="text-sm font-medium text-stone-800 dark:text-stone-100">{value || '—'}</span>
     </div>
   );
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
-        <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
+        <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200">
           <ArrowRight className="h-4 w-4" /> {t('common.back')}
         </button>
         <Button variant="secondary" onClick={() => navigate(`/inspections/${id}/edit`)}>
@@ -52,25 +52,25 @@ export const InspectionDetail = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="h-12 w-12 rounded-xl bg-honey-100 flex items-center justify-center text-2xl">🐝</div>
+        <div className="h-12 w-12 rounded-xl bg-honey-100 flex items-center justify-center text-2xl dark:bg-honey-900/40">🐝</div>
         <div>
-          <h1 className="text-2xl font-bold text-stone-800">
+          <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">
             {t('dashboard.hiveNumber')}{insp.hive?.number} {insp.hive?.name || ''}
           </h1>
-          <p className="text-stone-500">{formatDateTime(insp.date)}</p>
+          <p className="text-stone-500 dark:text-stone-400">{formatDateTime(insp.date)}</p>
         </div>
         <Badge color={strengthColors[insp.strength]}>{t(`hiveStrength.${insp.strength}`)}</Badge>
       </div>
 
       {insp.observations && (
         <Card className="p-5">
-          <h3 className="font-semibold text-stone-800 mb-2">📝 {t('inspections.observations')}</h3>
-          <p className="text-stone-600 whitespace-pre-wrap">{insp.observations}</p>
+          <h3 className="font-semibold text-stone-800 mb-2 dark:text-stone-100">📝 {t('inspections.observations')}</h3>
+          <p className="text-stone-600 whitespace-pre-wrap dark:text-stone-400">{insp.observations}</p>
         </Card>
       )}
 
       <Card className="p-5">
-        <h3 className="font-semibold text-stone-800 mb-3">{t('inspections.title')}</h3>
+        <h3 className="font-semibold text-stone-800 mb-3 dark:text-stone-100">{t('inspections.title')}</h3>
         <Field label={t('inspections.strength')} value={t(`hiveStrength.${insp.strength}`)} />
         <Field label={t('inspections.queenPresent')} value={insp.queenPresent === null ? '—' : insp.queenPresent ? t('common.yes') : t('common.no')} />
         <Field label={t('inspections.queenSeen')} value={insp.queenSeen === null ? '—' : insp.queenSeen ? t('common.yes') : t('common.no')} />
@@ -89,7 +89,7 @@ export const InspectionDetail = () => {
 
       {insp.photos && JSON.parse(insp.photos)?.length > 0 && (
         <Card className="p-5">
-          <h3 className="font-semibold text-stone-800 mb-3">📷 {t('inspections.photos')}</h3>
+          <h3 className="font-semibold text-stone-800 mb-3 dark:text-stone-100">📷 {t('inspections.photos')}</h3>
           <div className="flex gap-2 flex-wrap">
             {JSON.parse(insp.photos).map((p, i) => (
               <img key={i} src={p} className="h-28 w-28 rounded-lg object-cover" alt="inspection" />

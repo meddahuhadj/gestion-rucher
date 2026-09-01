@@ -19,14 +19,14 @@ export const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="flex items-center gap-1 bg-stone-100 rounded-lg p-1">
-      <Globe className="h-4 w-4 text-stone-500 mx-1 hidden sm:block" />
+    <div className="flex items-center gap-1 bg-stone-100 rounded-lg p-1 dark:bg-stone-800">
+      <Globe className="h-4 w-4 text-stone-500 mx-1 hidden sm:block dark:text-stone-400" />
       {langs.map((l) => (
         <button
           key={l.code}
           onClick={() => change(l.code)}
           className={`px-2.5 py-1 rounded-md text-xs font-medium transition ${
-            current === l.code ? 'bg-white text-honey-700 shadow-sm' : 'text-stone-500 hover:text-stone-700'
+            current === l.code ? 'bg-white text-honey-700 shadow-sm dark:bg-stone-700 dark:text-honey-300' : 'text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200'
           }`}
         >
           {l.label}

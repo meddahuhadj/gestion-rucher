@@ -73,22 +73,22 @@ export const HarvestsList = () => {
             <Card key={h.id} className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-lg bg-honey-100 flex items-center justify-center text-xl">🍯</div>
+                  <div className="h-10 w-10 rounded-lg bg-honey-100 flex items-center justify-center text-xl dark:bg-honey-900/40">🍯</div>
                   <div>
-                    <p className="font-semibold text-stone-800">{t('dashboard.hiveNumber')}{h.hive?.number} — {h.honeyType || t('harvests.title')}</p>
+                    <p className="font-semibold text-stone-800 dark:text-stone-100">{t('dashboard.hiveNumber')}{h.hive?.number} — {h.honeyType || t('harvests.title')}</p>
                     <p className="text-xs text-stone-400">{formatDate(h.date)} • Lot: {h.lot || '—'}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="text-end">
-                    <p className="font-bold text-stone-800">{h.quantity || h.weight || 0} kg</p>
-                    <p className="text-sm text-stone-500">{h.totalPrice !== null ? h.totalPrice.toLocaleString() : '—'}</p>
+                    <p className="font-bold text-stone-800 dark:text-stone-100">{h.quantity || h.weight || 0} kg</p>
+                    <p className="text-sm text-stone-500 dark:text-stone-400">{h.totalPrice !== null ? h.totalPrice.toLocaleString() : '—'}</p>
                   </div>
                   <Badge color="honey">{h.jars || 0} 🍯</Badge>
-                  <button onClick={() => { setEditing(h); setFormOpen(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg">
+                  <button onClick={() => { setEditing(h); setFormOpen(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg dark:hover:bg-stone-800">
                     <Pencil className="h-4 w-4" />
                   </button>
-                  <button onClick={() => setDeleting(h)} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
+                  <button onClick={() => setDeleting(h)} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-red-900/30">
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>

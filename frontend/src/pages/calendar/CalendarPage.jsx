@@ -41,7 +41,7 @@ export const CalendarPage = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-bold text-stone-800">📅 {t('calendar.title')}</h1>
+      <h1 className="text-xl font-bold text-stone-800 dark:text-stone-100">📅 {t('calendar.title')}</h1>
 
       {loading ? (
         <Spinner className="py-16" />
@@ -49,9 +49,16 @@ export const CalendarPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="p-4">
             <style>{`
-              .react-calendar { border: none; width: 100%; font-family: inherit; }
+              .react-calendar { border: none; width: 100%; font-family: inherit; background: transparent; }
               .react-calendar__tile { position: relative; }
               .react-calendar__navigation button { font-weight: 600; }
+              .dark .react-calendar, .dark .react-calendar__month-view__weekdays, .dark .react-calendar__tile, .dark .react-calendar__navigation button,
+              .dark .react-calendar__month-view__weekdays__weekday { background: transparent; color: #e7e5e4; }
+              .dark .react-calendar__tile:enabled:hover, .dark .react-calendar__tile:enabled:focus { background: #44403c; }
+              .dark .react-calendar__navigation__label, .dark .react-calendar__navigation__arrow { color: #e7e5e4; }
+              .dark .react-calendar__tile--active { background: #b45309; color: white; }
+              .dark .react-calendar__tile--now { background: #292524; }
+              .dark .react-calendar__month-view__weekdays__weekday abbr { color: #a8a29e; }
             `}</style>
             <Calendar
               onChange={setSelectedDate}
@@ -73,7 +80,7 @@ export const CalendarPage = () => {
           </Card>
 
           <div>
-            <h2 className="font-semibold text-stone-800 mb-3">
+            <h2 className="font-semibold text-stone-800 mb-3 dark:text-stone-100">
               {formatDate(selectedDate)} ({dayTasks.length})
             </h2>
             {dayTasks.length === 0 ? (
@@ -81,10 +88,10 @@ export const CalendarPage = () => {
             ) : (
               <div className="space-y-2">
                 {dayTasks.map((task) => (
-                  <div key={task.id} className="flex items-center gap-3 p-3 rounded-xl border border-stone-100 bg-white">
+                  <div key={task.id} className="flex items-center gap-3 p-3 rounded-xl border border-stone-100 bg-white dark:bg-stone-900 dark:border-stone-800">
                     <span className="text-xl">{task.hive ? TASK_TYPE_EMOJIS[task.type] || '🐝' : '📋'}</span>
                     <div className="flex-1">
-                      <p className="font-medium text-stone-800">
+                      <p className="font-medium text-stone-800 dark:text-stone-100">
                         {task.hive ? `${t('dashboard.hiveNumber')}${task.hive.number}` : t('apiaries.title')} — {t(`taskType.${task.type}`)}
                       </p>
                       <p className="text-xs text-stone-400">{task.time || ''} {task.description ? ` • ${task.description}` : ''}</p>

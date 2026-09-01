@@ -53,14 +53,14 @@ export const Dashboard = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-stone-800">{t('dashboard.title')} 🐝</h1>
-          <p className="text-sm text-stone-500">{new Date().toLocaleDateString('ar-DZ')}</p>
+          <h1 className="text-xl font-bold text-stone-800 dark:text-stone-100">{t('dashboard.title')} 🐝</h1>
+          <p className="text-sm text-stone-500 dark:text-stone-400">{new Date().toLocaleDateString('ar-DZ')}</p>
         </div>
         <div className="flex gap-2">
           <Link to="/hives/new" className="inline-flex items-center gap-1.5 px-3 py-2 bg-honey-500 text-white text-sm rounded-lg hover:bg-honey-600">
             <Plus className="h-4 w-4" /> {t('dashboard.addHive')}
           </Link>
-          <Link to="/inspections/new" className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 text-stone-700 text-sm rounded-lg hover:bg-stone-200 border border-stone-200">
+          <Link to="/inspections/new" className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 text-stone-700 text-sm rounded-lg hover:bg-stone-200 border border-stone-200 dark:bg-stone-800 dark:text-stone-200 dark:hover:bg-stone-700 dark:border-stone-700">
             <Search className="h-4 w-4" /> {t('dashboard.addInspection')}
           </Link>
         </div>
@@ -83,7 +83,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <h2 className="font-semibold text-stone-800">{t('dashboard.monthlyTrend')}</h2>
+            <h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('dashboard.monthlyTrend')}</h2>
           </CardHeader>
           <CardBody className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -102,7 +102,7 @@ export const Dashboard = () => {
 
         <Card>
           <CardHeader>
-            <h2 className="font-semibold text-stone-800">{t('statistics.hiveStatus')}</h2>
+            <h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.hiveStatus')}</h2>
           </CardHeader>
           <CardBody className="h-72">
             {statusPie.length === 0 ? (
@@ -127,8 +127,8 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader className="flex items-center justify-between">
-            <h2 className="font-semibold text-stone-800">📅 {t('dashboard.upcomingTasks')}</h2>
-            <Link to="/tasks" className="text-sm text-honey-600 hover:underline">{t('common.view')}</Link>
+            <h2 className="font-semibold text-stone-800 dark:text-stone-100">📅 {t('dashboard.upcomingTasks')}</h2>
+            <Link to="/tasks" className="text-sm text-honey-600 hover:underline dark:text-honey-400">{t('common.view')}</Link>
           </CardHeader>
           <CardBody>
             {upcomingTasks.length === 0 ? (
@@ -136,10 +136,10 @@ export const Dashboard = () => {
             ) : (
               <div className="space-y-2 max-h-80 overflow-y-auto scrollbar-thin">
                 {upcomingTasks.map((task) => (
-                  <Link to={`/tasks/${task.id}`} key={task.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-stone-100">
+                  <Link to={`/tasks/${task.id}`} key={task.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-stone-100 dark:hover:bg-stone-800 dark:border-stone-800">
                     <span className="text-xl">{task.hive ? `🐝` : '📋'}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-stone-800 truncate">
+                      <p className="text-sm font-medium text-stone-800 truncate dark:text-stone-100">
                         {task.hive ? `${t('dashboard.hiveNumber')}${task.hive.number}` : t('apiaries.title')} — {t(`taskType.${task.type}`)}
                       </p>
                       <p className="text-xs text-stone-400">{formatDate(task.date)} {task.time || ''}</p>
@@ -156,7 +156,7 @@ export const Dashboard = () => {
 
         <Card>
           <CardHeader className="flex items-center justify-between">
-            <h2 className="font-semibold text-stone-800">{t('dashboard.needsInspection')}</h2>
+            <h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('dashboard.needsInspection')}</h2>
           </CardHeader>
           <CardBody>
             {needsInspection.length === 0 ? (
@@ -164,10 +164,10 @@ export const Dashboard = () => {
             ) : (
               <div className="space-y-2 max-h-80 overflow-y-auto scrollbar-thin">
                 {needsInspection.map((hive) => (
-                  <Link to={`/hives/${hive.id}`} key={hive.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-stone-100">
+                  <Link to={`/hives/${hive.id}`} key={hive.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-stone-100 dark:hover:bg-stone-800 dark:border-stone-800">
                     <AlertTriangle className="h-5 w-5 text-amber-500 shrink-0" />
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-stone-800">{t('dashboard.hiveNumber')}{hive.number} {hive.name || ''}</p>
+                      <p className="text-sm font-medium text-stone-800 dark:text-stone-100">{t('dashboard.hiveNumber')}{hive.number} {hive.name || ''}</p>
                       <p className="text-xs text-stone-400">{hive.lastInspection ? `${t('hives.lastInspection')}: ${formatDate(hive.lastInspection)}` : t('common.noData')}</p>
                     </div>
                   </Link>
@@ -181,7 +181,7 @@ export const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <h2 className="font-semibold text-stone-800">{t('dashboard.recentInspections')}</h2>
+            <h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('dashboard.recentInspections')}</h2>
           </CardHeader>
           <CardBody>
             {recentInspections.length === 0 ? (
@@ -189,12 +189,12 @@ export const Dashboard = () => {
             ) : (
               <div className="space-y-3">
                 {recentInspections.map((insp) => (
-                  <Link key={insp.id} to={`/hives/${insp.hiveId}`} className="block p-3 rounded-xl hover:bg-stone-50 border border-stone-100">
+                  <Link key={insp.id} to={`/hives/${insp.hiveId}`} className="block p-3 rounded-xl hover:bg-stone-50 border border-stone-100 dark:hover:bg-stone-800 dark:border-stone-800">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold text-stone-800">{t('dashboard.hiveNumber')}{insp.hive?.number}</p>
+                      <p className="text-sm font-semibold text-stone-800 dark:text-stone-100">{t('dashboard.hiveNumber')}{insp.hive?.number}</p>
                       <span className="text-xs text-stone-400">{formatDate(insp.date)}</span>
                     </div>
-                    <p className="text-sm text-stone-600 mt-1 line-clamp-2">{insp.observations || '—'}</p>
+                    <p className="text-sm text-stone-600 mt-1 line-clamp-2 dark:text-stone-400">{insp.observations || '—'}</p>
                   </Link>
                 ))}
               </div>
@@ -204,7 +204,7 @@ export const Dashboard = () => {
 
         <Card>
           <CardHeader>
-            <h2 className="font-semibold text-stone-800">⚠️ {t('dashboard.overdueTasks')}</h2>
+            <h2 className="font-semibold text-stone-800 dark:text-stone-100">⚠️ {t('dashboard.overdueTasks')}</h2>
           </CardHeader>
           <CardBody>
             {overdueTasks.length === 0 ? (
@@ -212,10 +212,10 @@ export const Dashboard = () => {
             ) : (
               <div className="space-y-2">
                 {overdueTasks.slice(0, 8).map((task) => (
-                  <div key={task.id} className="flex items-center gap-3 p-3 rounded-xl border border-red-100 bg-red-50">
+                  <div key={task.id} className="flex items-center gap-3 p-3 rounded-xl border border-red-100 bg-red-50 dark:border-red-900/50 dark:bg-red-900/20">
                     <span className="text-xl">{task.hive ? '🐝' : '📋'}</span>
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-red-800">{t(`taskType.${task.type}`)}</p>
+                      <p className="text-sm font-medium text-red-800 dark:text-red-300">{t(`taskType.${task.type}`)}</p>
                       <p className="text-xs text-red-400">{formatDate(task.date)}</p>
                     </div>
                   </div>

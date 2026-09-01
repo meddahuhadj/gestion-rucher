@@ -6,13 +6,13 @@ import { useAuth } from '../../context/AuthContext';
 import { Button, Input } from '../../components/ui';
 
 const Toggle = ({ options, value, onChange }) => (
-  <div className="flex bg-stone-100 rounded-lg p-1 w-fit mx-auto">
+  <div className="flex bg-stone-100 rounded-lg p-1 w-fit mx-auto dark:bg-stone-800">
     {options.map((o) => (
       <button
         key={o.value}
         onClick={() => onChange(o.value)}
         className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${
-          value === o.value ? 'bg-white text-honey-700 shadow-sm' : 'text-stone-500'
+          value === o.value ? 'bg-white text-honey-700 shadow-sm dark:bg-stone-700 dark:text-honey-300' : 'text-stone-500 dark:text-stone-400'
         }`}
       >
         {o.label}
@@ -29,7 +29,7 @@ const AuthLayout = ({ children, mode }) => {
     { value: 'en', label: 'EN' },
   ];
   return (
-    <div className="min-h-screen bg-gradient-to-br from-honey-50 via-amber-50 to-stone-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-honey-50 via-amber-50 to-stone-100 flex items-center justify-center p-4 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950">
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-6">
           <Toggle
@@ -41,27 +41,27 @@ const AuthLayout = ({ children, mode }) => {
             options={options}
           />
         </div>
-        <div className="bg-white rounded-3xl shadow-xl p-8">
+        <div className="bg-white rounded-3xl shadow-xl p-8 dark:bg-stone-900 dark:shadow-none dark:border dark:border-stone-800">
           <div className="text-center mb-8">
             <div className="h-16 w-16 mx-auto mb-4 rounded-2xl bg-honey-500 flex items-center justify-center">
               <Hexagon className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-stone-800">{t('appName')}</h1>
-            <p className="text-stone-500">{t('tagline')} 🐝</p>
+            <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">{t('appName')}</h1>
+            <p className="text-stone-500 dark:text-stone-400">{t('tagline')} 🐝</p>
           </div>
           {children}
-          <p className="mt-6 text-sm text-stone-500 text-center">
+          <p className="mt-6 text-sm text-stone-500 text-center dark:text-stone-400">
             {mode === 'login' ? (
               <>
                 {t('auth.noAccount')}{' '}
-                <Link to="/register" className="text-honey-600 font-medium hover:underline">
+                <Link to="/register" className="text-honey-600 font-medium hover:underline dark:text-honey-400">
                   {t('auth.register')}
                 </Link>
               </>
             ) : (
               <>
                 {t('auth.haveAccount')}{' '}
-                <Link to="/login" className="text-honey-600 font-medium hover:underline">
+                <Link to="/login" className="text-honey-600 font-medium hover:underline dark:text-honey-400">
                   {t('auth.login')}
                 </Link>
               </>

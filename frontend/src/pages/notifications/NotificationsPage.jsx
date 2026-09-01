@@ -69,12 +69,12 @@ export const NotificationsPage = () => {
                     n.type === 'WARNING' ? 'bg-amber-500' : n.type === 'TASK_DUE' ? 'bg-orange-500' : 'bg-honey-400'
                   }`} />
                   <div>
-                    <p className="font-semibold text-stone-800">{n.title}</p>
-                    <p className="text-sm text-stone-600">{n.message}</p>
+                    <p className="font-semibold text-stone-800 dark:text-stone-100">{n.title}</p>
+                    <p className="text-sm text-stone-600 dark:text-stone-400">{n.message}</p>
                     <p className="text-xs text-stone-400 mt-1">{formatDateTime(n.createdAt)}</p>
                   </div>
                 </div>
-                <button onClick={(e) => { e.stopPropagation(); setDeleting(n); }} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg shrink-0">
+                <button onClick={(e) => { e.stopPropagation(); setDeleting(n); }} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg shrink-0 dark:hover:bg-red-900/30">
                   <Trash2 className="h-4 w-4" />
                 </button>
               </div>

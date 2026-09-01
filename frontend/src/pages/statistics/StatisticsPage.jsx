@@ -40,7 +40,7 @@ export const StatisticsPage = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-bold text-stone-800">📊 {t('statistics.title')}</h1>
+      <h1 className="text-xl font-bold text-stone-800 dark:text-stone-100">📊 {t('statistics.title')}</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <StatCard icon={BarChart3} label={t('dashboard.totalHives')} value={stats.hives} color="honey" />
@@ -51,7 +51,7 @@ export const StatisticsPage = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card>
-          <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.financialTrend')}</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.financialTrend')}</h2></CardHeader>
           <CardBody className="h-72">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={stats.monthlyTrend}>
@@ -68,7 +68,7 @@ export const StatisticsPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.hiveStatus')}</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.hiveStatus')}</h2></CardHeader>
           <CardBody className="h-72">
             {statusData.length === 0 ? <EmptyState /> : (
               <ResponsiveContainer width="100%" height="100%">
@@ -85,7 +85,7 @@ export const StatisticsPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.hiveStrength')}</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.hiveStrength')}</h2></CardHeader>
           <CardBody className="h-72">
             {strengthData.length === 0 ? <EmptyState /> : (
               <ResponsiveContainer width="100%" height="100%">
@@ -102,7 +102,7 @@ export const StatisticsPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.expensesByCategory')}</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.expensesByCategory')}</h2></CardHeader>
           <CardBody className="h-72">
             {catData.length === 0 ? <EmptyState /> : (
               <ResponsiveContainer width="100%" height="100%">
@@ -119,7 +119,7 @@ export const StatisticsPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.revenuesByType')}</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.revenuesByType')}</h2></CardHeader>
           <CardBody className="h-72">
             {typeData.length === 0 ? <EmptyState /> : (
               <ResponsiveContainer width="100%" height="100%">
@@ -136,7 +136,7 @@ export const StatisticsPage = () => {
         </Card>
 
         <Card>
-          <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.producerHives')}</h2></CardHeader>
+          <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.producerHives')}</h2></CardHeader>
           <CardBody className="h-72">
             {producerData.length === 0 ? <EmptyState /> : (
               <ResponsiveContainer width="100%" height="100%">

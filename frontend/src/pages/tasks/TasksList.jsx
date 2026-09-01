@@ -94,11 +94,11 @@ export const TasksList = () => {
             <Card key={task.id} className="p-4">
               <div className="flex items-center justify-between">
                 <button onClick={() => setViewing(task)} className="flex items-center gap-3 flex-1 text-start">
-                  <div className="h-10 w-10 rounded-lg bg-honey-100 flex items-center justify-center text-xl">
+                  <div className="h-10 w-10 rounded-lg bg-honey-100 flex items-center justify-center text-xl dark:bg-honey-900/40">
                     {task.hive ? TASK_TYPE_EMOJIS[task.type] || '📋' : '📋'}
                   </div>
                   <div className="flex-1">
-                    <p className="font-semibold text-stone-800">
+                    <p className="font-semibold text-stone-800 dark:text-stone-100">
                       {task.hive ? `${t('dashboard.hiveNumber')}${task.hive.number}` : t('apiaries.title')} — {t(`taskType.${task.type}`)}
                     </p>
                     <p className="text-xs text-stone-400">
@@ -112,10 +112,10 @@ export const TasksList = () => {
                     {t(`taskPriority.${task.priority}`)}
                   </Badge>
                   <Badge color={statusColors[task.status]}>{t(`taskStatus.${task.status}`)}</Badge>
-                  <button onClick={() => { setEditing(task); setFormOpen(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg">
+                  <button onClick={() => { setEditing(task); setFormOpen(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg dark:hover:bg-stone-800">
                     <Pencil className="h-4 w-4" />
                   </button>
-                  <button onClick={() => setDeleting(task)} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg">
+                  <button onClick={() => setDeleting(task)} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-red-900/30">
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
@@ -209,12 +209,12 @@ const TaskDetail = ({ task, onClose }) => {
           <Badge color={task.priority === 'URGENT' ? 'red' : 'stone'}>{t(`taskPriority.${task.priority}`)}</Badge>
           <Badge color={task.status}>{t(`taskStatus.${task.status}`)}</Badge>
         </div>
-        <p><span className="text-stone-500">{t('common.hive')}: </span>
-          <span className="font-medium">{task.hive ? t('dashboard.hiveNumber') + task.hive.number : t('apiaries.title')}</span>
+        <p><span className="text-stone-500 dark:text-stone-400">{t('common.hive')}: </span>
+          <span className="font-medium dark:text-stone-200">{task.hive ? t('dashboard.hiveNumber') + task.hive.number : t('apiaries.title')}</span>
         </p>
-        <p><span className="text-stone-500">{t('tasks.date')}: </span><span className="font-medium">{formatDate(task.date)} {task.time || ''}</span></p>
+        <p><span className="text-stone-500 dark:text-stone-400">{t('tasks.date')}: </span><span className="font-medium dark:text-stone-200">{formatDate(task.date)} {task.time || ''}</span></p>
         {task.description && (
-          <p className="text-stone-600 bg-stone-50 rounded-lg p-3">{task.description}</p>
+          <p className="text-stone-600 bg-stone-50 rounded-lg p-3 dark:text-stone-300 dark:bg-stone-800">{task.description}</p>
         )}
       </div>
     </Modal>

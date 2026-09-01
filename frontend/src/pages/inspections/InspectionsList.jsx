@@ -52,7 +52,7 @@ export const InspectionsList = () => {
 
       <Card className="p-4 mb-5">
         <div className="relative max-w-sm">
-          <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400" />
+          <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-400 dark:text-stone-500" />
           <Input className="ps-9" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t('common.search')} />
         </div>
       </Card>
@@ -68,9 +68,9 @@ export const InspectionsList = () => {
               <Link to={`/inspections/${insp.id}`} className="block">
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-lg bg-honey-100 flex items-center justify-center text-lg">🐝</div>
+                    <div className="h-9 w-9 rounded-lg bg-honey-100 flex items-center justify-center text-lg dark:bg-honey-900/40">🐝</div>
                     <div>
-                      <p className="font-semibold text-stone-800">
+                      <p className="font-semibold text-stone-800 dark:text-stone-100">
                         {t('dashboard.hiveNumber')}{insp.hive?.number} {insp.hive?.name || ''}
                       </p>
                       <p className="text-xs text-stone-400">{formatDate(insp.date)} {insp.time || ''}</p>
@@ -80,13 +80,13 @@ export const InspectionsList = () => {
                     <Badge color={strengthColors[insp.strength]}>{t(`hiveStrength.${insp.strength}`)}</Badge>
                     <button
                       onClick={(e) => { e.preventDefault(); setDeleting(insp); }}
-                      className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
+                      className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-red-900/30"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
-                {insp.observations && <p className="text-sm text-stone-600 line-clamp-2">{insp.observations}</p>}
+                {insp.observations && <p className="text-sm text-stone-600 line-clamp-2 dark:text-stone-400">{insp.observations}</p>}
               </Link>
             </Card>
           ))}

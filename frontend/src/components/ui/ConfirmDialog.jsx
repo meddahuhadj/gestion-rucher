@@ -7,7 +7,7 @@ export const ConfirmDialog = ({ open, onClose, onConfirm, title, message, confir
   if (!open) return null;
   return (
     <Modal open={open} onClose={onClose} title={title || t('common.confirmDelete')} size="sm">
-      <p className="text-stone-600 mb-5">{message || t('common.confirmDelete')}</p>
+      <p className="text-stone-600 mb-5 dark:text-stone-300">{message || t('common.confirmDelete')}</p>
       <div className="flex gap-3 justify-end">
         <Button variant="secondary" onClick={onClose}>{t('common.cancel')}</Button>
         <Button variant={danger ? 'danger' : 'primary'} onClick={onConfirm}>

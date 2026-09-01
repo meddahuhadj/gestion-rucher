@@ -8,13 +8,13 @@ export const PageHeader = ({ title, subtitle, onAdd, addLabel, icon: Icon }) => 
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3">
         {Icon && (
-          <div className="h-10 w-10 rounded-xl bg-honey-100 flex items-center justify-center">
-            <Icon className="h-5 w-5 text-honey-600" />
+          <div className="h-10 w-10 rounded-xl bg-honey-100 flex items-center justify-center dark:bg-honey-900/40">
+            <Icon className="h-5 w-5 text-honey-600 dark:text-honey-400" />
           </div>
         )}
         <div>
-          <h1 className="text-xl font-bold text-stone-800">{title}</h1>
-          {subtitle && <p className="text-sm text-stone-500">{subtitle}</p>}
+          <h1 className="text-xl font-bold text-stone-800 dark:text-stone-100">{title}</h1>
+          {subtitle && <p className="text-sm text-stone-500 dark:text-stone-400">{subtitle}</p>}
         </div>
       </div>
       {onAdd && (

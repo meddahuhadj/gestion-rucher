@@ -94,13 +94,13 @@ export const ApiariesList = () => {
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="h-11 w-11 rounded-xl bg-honey-100 flex items-center justify-center">
-                    <Warehouse className="h-6 w-6 text-honey-600" />
+                  <div className="h-11 w-11 rounded-xl bg-honey-100 flex items-center justify-center dark:bg-honey-900/40">
+                    <Warehouse className="h-6 w-6 text-honey-600 dark:text-honey-400" />
                   </div>
                   <div>
-                    <p className="font-semibold text-stone-800">{apiary.name}</p>
+                    <p className="font-semibold text-stone-800 dark:text-stone-100">{apiary.name}</p>
                     {apiary.location && (
-                      <p className="text-sm text-stone-500 flex items-center gap-1">
+                      <p className="text-sm text-stone-500 flex items-center gap-1 dark:text-stone-400">
                         <MapPin className="h-3.5 w-3.5" /> {apiary.location}
                       </p>
                     )}
@@ -109,19 +109,19 @@ export const ApiariesList = () => {
                 <div className="flex gap-1">
                   <button
                     onClick={(e) => { e.stopPropagation(); setEditing(apiary); setFormOpen(true); }}
-                    className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg"
+                    className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg dark:hover:bg-stone-800"
                   >
                     <Pencil className="h-4 w-4" />
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); setDeleting(apiary); }}
-                    className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
+                    className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-red-900/30"
                   >
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
               </div>
-              <div className="mt-4 flex items-center gap-2 text-sm text-stone-500">
+              <div className="mt-4 flex items-center gap-2 text-sm text-stone-500 dark:text-stone-400">
                 <Hexagon className="h-4 w-4" />
                 {apiary._count?.hives || 0} {t('apiaries.hiveCount')}
               </div>

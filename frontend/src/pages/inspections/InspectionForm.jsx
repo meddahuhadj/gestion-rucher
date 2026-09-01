@@ -14,7 +14,7 @@ const QuickToggle = ({ label, active, onClick, emoji }) => (
     type="button"
     onClick={onClick}
     className={`px-4 py-2.5 rounded-xl text-sm font-medium border transition ${
-      active ? 'bg-honey-500 text-white border-honey-500 shadow-sm' : 'bg-white text-stone-600 border-stone-200 hover:border-honey-300'
+      active ? 'bg-honey-500 text-white border-honey-500 shadow-sm' : 'bg-white text-stone-600 border-stone-200 hover:border-honey-300 dark:bg-stone-800 dark:text-stone-300 dark:border-stone-700'
     }`}
   >
     {emoji} {label}
@@ -116,13 +116,13 @@ export const InspectionForm = () => {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
+      <button onClick={() => navigate(-1)} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200">
         <ArrowRight className="h-4 w-4" /> {t('common.back')}
       </button>
-      <h1 className="text-2xl font-bold text-stone-800">{isEdit ? t('inspections.edit') : t('inspections.add')} 🐝</h1>
+      <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">{isEdit ? t('inspections.edit') : t('inspections.add')} 🐝</h1>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">🐝 {t('inspections.title')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">🐝 {t('inspections.title')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <Select value={form.hiveId} onChange={(e) => update('hiveId', e.target.value)} label={t('common.hive')}>
             <option value="">{t('common.all')}</option>
@@ -142,7 +142,7 @@ export const InspectionForm = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">{t('inspections.strength')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('inspections.strength')}</h2></CardHeader>
         <CardBody>
           <div className="flex flex-wrap gap-2">
             {strengths.map((s) => {
@@ -154,7 +154,7 @@ export const InspectionForm = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">👑 {t('inspections.queenPresent')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">👑 {t('inspections.queenPresent')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <div className="flex flex-wrap gap-2">
             <QuickToggle emoji="👑" label={t('inspections.queenPresent')} active={form.queenPresent === 'yes'} onClick={() => update('queenPresent', 'yes')} />
@@ -174,7 +174,7 @@ export const InspectionForm = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">🍯 {t('inspections.honeyStores')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">🍯 {t('inspections.honeyStores')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Select label={t('inspections.honeyStores')} value={form.honeyStores} onChange={(e) => update('honeyStores', e.target.value)}>
@@ -194,7 +194,7 @@ export const InspectionForm = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">💊 {t('inspections.healthStatus')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">💊 {t('inspections.healthStatus')}</h2></CardHeader>
         <CardBody className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Input label={t('inspections.healthStatus')} value={form.healthStatus} onChange={(e) => update('healthStatus', e.target.value)} placeholder={t('optional')} />
           <Input label={t('inspections.parasites')} value={form.parasites} onChange={(e) => update('parasites', e.target.value)} placeholder={t('optional')} />
@@ -203,14 +203,14 @@ export const InspectionForm = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">📝 {t('inspections.observations')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">📝 {t('inspections.observations')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <TextArea value={form.observations} onChange={(e) => update('observations', e.target.value)} rows={4} placeholder={t('inspections.observations')} />
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">{t('inspections.photos')}</label>
+            <label className="block text-sm font-medium text-stone-700 mb-2 dark:text-stone-300">{t('inspections.photos')}</label>
             <input
               type="file" accept="image/*" multiple onChange={handlePhotoUpload}
-              className="block w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-honey-100 file:text-honey-700 hover:file:bg-honey-200 mb-3"
+              className="block w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-honey-100 file:text-honey-700 hover:file:bg-honey-200 mb-3 dark:text-stone-400 dark:file:bg-honey-900/40 dark:file:text-honey-300"
             />
             {uploading && <Button variant="secondary" size="sm" disabled>...</Button>}
             {photos.length > 0 && (

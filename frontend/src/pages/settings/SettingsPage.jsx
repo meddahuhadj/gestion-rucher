@@ -99,24 +99,24 @@ export const SettingsPage = () => {
       {active && (
         <Card>
           <CardHeader>
-            <h2 className="font-semibold text-stone-800 flex items-center gap-2">
+            <h2 className="font-semibold text-stone-800 flex items-center gap-2 dark:text-stone-100">
               <Users className="h-4 w-4" /> {t('settings.workspace')}
-              <span className="ms-auto text-xs px-2 py-0.5 rounded-full bg-honey-100 text-honey-700 font-medium">
+              <span className="ms-auto text-xs px-2 py-0.5 rounded-full bg-honey-100 text-honey-700 font-medium dark:bg-honey-900/40 dark:text-honey-300">
                 {myRole === 'OWNER' ? t('settings.roleOwner') : t('settings.roleMember')}
               </span>
             </h2>
           </CardHeader>
           <CardBody className="space-y-4">
             <div>
-              <p className="text-sm font-medium text-stone-700">{t('settings.workspaceName')}</p>
-              <p className="text-lg font-semibold text-stone-800">{active.name}</p>
+              <p className="text-sm font-medium text-stone-700 dark:text-stone-300">{t('settings.workspaceName')}</p>
+              <p className="text-lg font-semibold text-stone-800 dark:text-stone-100">{active.name}</p>
             </div>
 
             {myRole === 'OWNER' && (
               <div>
-                <p className="text-sm font-medium text-stone-700 mb-1">{t('settings.inviteCode')}</p>
+                <p className="text-sm font-medium text-stone-700 mb-1 dark:text-stone-300">{t('settings.inviteCode')}</p>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-lg tracking-widest bg-honey-50 text-honey-700 px-4 py-2 rounded-lg">{active.code}</span>
+                  <span className="font-mono text-lg tracking-widest bg-honey-50 text-honey-700 px-4 py-2 rounded-lg dark:bg-honey-900/40 dark:text-honey-300">{active.code}</span>
                   <Button variant="secondary" onClick={copyCode}>
                     <Copy className="h-4 w-4" /> {copied ? t('common.copied') : t('common.copy')}
                   </Button>
@@ -126,22 +126,22 @@ export const SettingsPage = () => {
             )}
 
             <div>
-              <p className="text-sm font-medium text-stone-700 mb-1">{t('settings.members')} ({members.length})</p>
+              <p className="text-sm font-medium text-stone-700 mb-1 dark:text-stone-300">{t('settings.members')} ({members.length})</p>
               <div className="space-y-2">
                 {members.map((m) => (
-                  <div key={m.id} className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-stone-50">
-                    <span className="h-8 w-8 rounded-full bg-honey-200 flex items-center justify-center text-sm font-bold text-honey-700">{m.name[0]}</span>
+                  <div key={m.id} className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-stone-50 dark:bg-stone-800">
+                    <span className="h-8 w-8 rounded-full bg-honey-200 flex items-center justify-center text-sm font-bold text-honey-700 dark:bg-honey-900/40 dark:text-honey-300">{m.name[0]}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-stone-800 truncate">{m.name}</p>
+                      <p className="text-sm font-medium text-stone-800 truncate dark:text-stone-100">{m.name}</p>
                       <p className="text-xs text-stone-400 truncate">{m.email}</p>
                     </div>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-200 text-stone-600 uppercase">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-200 text-stone-600 uppercase dark:bg-stone-700 dark:text-stone-300">
                       {m.role === 'OWNER' ? 'Admin' : 'Membre'}
                     </span>
                     {myRole === 'OWNER' && m.id !== user?.id && m.role !== 'OWNER' && (
                       <button
                         onClick={() => setTransferTarget(m)}
-                        className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-honey-50 rounded-lg"
+                        className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-honey-50 rounded-lg dark:hover:bg-stone-700"
                         title={t('settings.makeAdmin')}
                       >
                         <UserCog className="h-4 w-4" />
@@ -150,7 +150,7 @@ export const SettingsPage = () => {
                     {myRole === 'OWNER' && m.id !== user?.id && (
                       <button
                         onClick={() => setRemoveTarget(m)}
-                        className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg"
+                        className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-stone-700"
                         title={t('settings.removeMember')}
                       >
                         <UserMinus className="h-4 w-4" />
@@ -161,7 +161,7 @@ export const SettingsPage = () => {
               </div>
             </div>
 
-            <div className="pt-2 border-t border-stone-100">
+            <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
               <Button variant="danger" onClick={() => setConfirmLeave(true)}>
                 <LogOut className="h-4 w-4" /> {t('settings.leaveWorkspace')}
               </Button>
@@ -198,7 +198,7 @@ export const SettingsPage = () => {
       />
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">👤 {t('settings.profile')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">👤 {t('settings.profile')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <Input label={t('settings.name')} value={name} onChange={(e) => setName(e.target.value)} />
           <Input label={t('settings.email')} type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -218,7 +218,7 @@ export const SettingsPage = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800 flex items-center gap-2"><KeyRound className="h-4 w-4" /> {t('settings.changePassword')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 flex items-center gap-2 dark:text-stone-100"><KeyRound className="h-4 w-4" /> {t('settings.changePassword')}</h2></CardHeader>
         <CardBody className="space-y-4">
           <Input type="password" label={t('settings.currentPassword')} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
           <Input type="password" label={t('settings.newPassword')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
@@ -227,7 +227,7 @@ export const SettingsPage = () => {
       </Card>
 
       <Card>
-        <CardHeader><h2 className="font-semibold text-stone-800">💾 {t('settings.data')}</h2></CardHeader>
+        <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">💾 {t('settings.data')}</h2></CardHeader>
         <CardBody className="space-y-3">
           <Button variant="secondary" onClick={exportData}>
             <Download className="h-4 w-4" /> {t('settings.export')}

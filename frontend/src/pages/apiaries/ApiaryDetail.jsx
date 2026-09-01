@@ -37,25 +37,25 @@ export const ApiaryDetail = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <button onClick={() => navigate('/apiaries')} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700">
+        <button onClick={() => navigate('/apiaries')} className="inline-flex items-center gap-1 text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200">
           <ArrowRight className="h-4 w-4" /> {t('common.back')}
         </button>
         <Button variant="secondary" onClick={() => navigate('/hives/new')}>{t('dashboard.addHive')}</Button>
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="h-14 w-14 rounded-2xl bg-honey-100 flex items-center justify-center">
-          <MapPin className="h-7 w-7 text-honey-600" />
+        <div className="h-14 w-14 rounded-2xl bg-honey-100 flex items-center justify-center dark:bg-honey-900/40">
+          <MapPin className="h-7 w-7 text-honey-600 dark:text-honey-400" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold text-stone-800">{apiary.name}</h1>
-          {apiary.location && <p className="text-stone-500">{apiary.location}</p>}
+          <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">{apiary.name}</h1>
+          {apiary.location && <p className="text-stone-500 dark:text-stone-400">{apiary.location}</p>}
           {apiary.description && <p className="text-sm text-stone-400 mt-1">{apiary.description}</p>}
         </div>
       </div>
 
       <div>
-        <h2 className="text-lg font-semibold text-stone-800 mb-4">
+        <h2 className="text-lg font-semibold text-stone-800 mb-4 dark:text-stone-100">
           {t('apiaries.hives')} ({apiary.hives?.length || 0})
         </h2>
         {apiary.hives?.length === 0 ? (

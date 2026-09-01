@@ -24,7 +24,7 @@ export const NotificationBell = () => {
   return (
     <button
       onClick={() => navigate('/notifications')}
-      className="relative p-2 text-stone-500 hover:text-honey-600 hover:bg-stone-100 rounded-lg"
+      className="relative p-2 text-stone-500 hover:text-honey-600 hover:bg-stone-100 rounded-lg dark:text-stone-400 dark:hover:bg-stone-800"
     >
       <Bell className="h-5 w-5" />
       {count > 0 && (

@@ -52,24 +52,24 @@ export const WorkspacePage = () => {
 
   const tabCls = (m) =>
     `flex-1 py-3 rounded-xl text-sm font-semibold transition ${
-      mode === m ? 'bg-honey-600 text-white shadow' : 'bg-stone-100 text-stone-500 hover:bg-stone-200'
+      mode === m ? 'bg-honey-600 text-white shadow' : 'bg-stone-100 text-stone-500 hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-400 dark:hover:bg-stone-700'
     }`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-honey-50 via-amber-50 to-stone-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-honey-50 via-amber-50 to-stone-100 flex items-center justify-center p-4 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950">
       <div className="w-full max-w-md">
         <div className="text-center mb-6">
           <div className="h-16 w-16 mx-auto mb-3 rounded-2xl bg-honey-500 flex items-center justify-center">
             <Hexagon className="h-8 w-8 text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-stone-800">{t('appName')}</h1>
-          <p className="text-stone-500">{t('tagline')} 🐝</p>
+          <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">{t('appName')}</h1>
+          <p className="text-stone-500 dark:text-stone-400">{t('tagline')} 🐝</p>
         </div>
 
         {workspaces.length > 0 && (
           <Card className="mb-6">
             <CardBody>
-              <h2 className="font-semibold text-stone-700 flex items-center gap-2 mb-3">
+              <h2 className="font-semibold text-stone-700 flex items-center gap-2 mb-3 dark:text-stone-300">
                 <Users className="h-4 w-4" /> {t('workspace.yourWorkspaces')}
               </h2>
               <div className="space-y-2">
@@ -77,13 +77,13 @@ export const WorkspacePage = () => {
                   <button
                     key={w.id}
                     onClick={() => selectExisting(w.id)}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-stone-200 hover:border-honey-400 hover:bg-honey-50 transition text-start"
+                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl border border-stone-200 hover:border-honey-400 hover:bg-honey-50 transition text-start dark:border-stone-700 dark:hover:bg-honey-900/30"
                   >
                     <div>
-                      <p className="font-medium text-stone-800">{w.name}</p>
+                      <p className="font-medium text-stone-800 dark:text-stone-100">{w.name}</p>
                       <p className="text-xs text-stone-400">{w.members.length} {t('workspace.members')}</p>
                     </div>
-                    <span className="text-xs font-mono text-honey-600 bg-honey-50 px-2 py-1 rounded-lg">{w.code}</span>
+                    <span className="text-xs font-mono text-honey-600 bg-honey-50 px-2 py-1 rounded-lg dark:text-honey-300 dark:bg-honey-900/40">{w.code}</span>
                   </button>
                 ))}
               </div>

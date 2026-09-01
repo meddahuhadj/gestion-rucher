@@ -72,10 +72,10 @@ export const FinancesOverview = () => {
     <div>
       <PageHeader title={t('finances.title')} icon={Wallet} />
 
-      <div className="flex gap-1 bg-stone-100 rounded-xl p-1 mb-5 w-fit">
+      <div className="flex gap-1 bg-stone-100 rounded-xl p-1 mb-5 w-fit dark:bg-stone-800">
         {TABS.map((tk) => (
           <button key={tk} onClick={() => setTab(tk)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition ${tab === tk ? 'bg-white text-honey-700 shadow-sm' : 'text-stone-500'}`}>
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition ${tab === tk ? 'bg-white text-honey-700 shadow-sm dark:bg-stone-700 dark:text-honey-300' : 'text-stone-500 dark:text-stone-400'}`}>
             {t(`finances.${tk}`)}
           </button>
         ))}
@@ -93,33 +93,33 @@ export const FinancesOverview = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             <Card className="p-4">
-              <p className="text-xs text-stone-500">{t('finances.monthly')} {t('finances.expenses')}</p>
-              <p className="font-bold text-stone-800">{formatMoney(stats.monthlyExpense)}</p>
+              <p className="text-xs text-stone-500 dark:text-stone-400">{t('finances.monthly')} {t('finances.expenses')}</p>
+              <p className="font-bold text-stone-800 dark:text-stone-100">{formatMoney(stats.monthlyExpense)}</p>
             </Card>
             <Card className="p-4">
-              <p className="text-xs text-stone-500">{t('finances.monthly')} {t('finances.revenues')}</p>
-              <p className="font-bold text-stone-800">{formatMoney(stats.monthlyRevenue)}</p>
+              <p className="text-xs text-stone-500 dark:text-stone-400">{t('finances.monthly')} {t('finances.revenues')}</p>
+              <p className="font-bold text-stone-800 dark:text-stone-100">{formatMoney(stats.monthlyRevenue)}</p>
             </Card>
             <Card className="p-4">
-              <p className="text-xs text-stone-500">{t('finances.monthly')} {t('finances.netProfit')}</p>
-              <p className="font-bold text-stone-800">{formatMoney(stats.monthlyProfit)}</p>
+              <p className="text-xs text-stone-500 dark:text-stone-400">{t('finances.monthly')} {t('finances.netProfit')}</p>
+              <p className="font-bold text-stone-800 dark:text-stone-100">{formatMoney(stats.monthlyProfit)}</p>
             </Card>
             <Card className="p-4">
-              <p className="text-xs text-stone-500">{t('finances.annual')} {t('finances.expenses')}</p>
-              <p className="font-bold text-stone-800">{formatMoney(stats.annualExpense)}</p>
+              <p className="text-xs text-stone-500 dark:text-stone-400">{t('finances.annual')} {t('finances.expenses')}</p>
+              <p className="font-bold text-stone-800 dark:text-stone-100">{formatMoney(stats.annualExpense)}</p>
             </Card>
             <Card className="p-4">
-              <p className="text-xs text-stone-500">{t('finances.annual')} {t('finances.revenues')}</p>
-              <p className="font-bold text-stone-800">{formatMoney(stats.annualRevenue)}</p>
+              <p className="text-xs text-stone-500 dark:text-stone-400">{t('finances.annual')} {t('finances.revenues')}</p>
+              <p className="font-bold text-stone-800 dark:text-stone-100">{formatMoney(stats.annualRevenue)}</p>
             </Card>
             <Card className="p-4">
-              <p className="text-xs text-stone-500">{t('finances.annual')} {t('finances.netProfit')}</p>
-              <p className="font-bold text-stone-800">{formatMoney(stats.annualProfit)}</p>
+              <p className="text-xs text-stone-500 dark:text-stone-400">{t('finances.annual')} {t('finances.netProfit')}</p>
+              <p className="font-bold text-stone-800 dark:text-stone-100">{formatMoney(stats.annualProfit)}</p>
             </Card>
           </div>
 
           <Card>
-            <CardHeader><h2 className="font-semibold text-stone-800">{t('statistics.financialTrend')}</h2></CardHeader>
+            <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">{t('statistics.financialTrend')}</h2></CardHeader>
             <CardBody className="h-80">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={stats.monthlyTrend}>
@@ -142,14 +142,14 @@ export const FinancesOverview = () => {
             <Card key={e.id} className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-stone-800">{t(`expenseCategory.${e.category}`)}</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-100">{t(`expenseCategory.${e.category}`)}</p>
                   <p className="text-xs text-stone-400">{formatDate(e.date)} {e.hive ? `• ${t('dashboard.hiveNumber')}${e.hive.number}` : ''}</p>
-                  {e.description && <p className="text-sm text-stone-600 mt-1">{e.description}</p>}
+                  {e.description && <p className="text-sm text-stone-600 mt-1 dark:text-stone-400">{e.description}</p>}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-red-600">{formatMoney(e.amount)}</span>
-                  <button onClick={() => { setEditingExp(e); setExpForm(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg"><Pencil className="h-4 w-4" /></button>
-                  <button onClick={() => setDeleting({ type: 'expense', id: e.id })} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="h-4 w-4" /></button>
+                  <span className="font-bold text-red-600 dark:text-red-400">{formatMoney(e.amount)}</span>
+                  <button onClick={() => { setEditingExp(e); setExpForm(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg dark:hover:bg-stone-800"><Pencil className="h-4 w-4" /></button>
+                  <button onClick={() => setDeleting({ type: 'expense', id: e.id })} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-red-900/30"><Trash2 className="h-4 w-4" /></button>
                 </div>
               </div>
             </Card>
@@ -162,14 +162,14 @@ export const FinancesOverview = () => {
             <Card key={r.id} className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-stone-800">{t(`revenueType.${r.type}`)}</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-100">{t(`revenueType.${r.type}`)}</p>
                   <p className="text-xs text-stone-400">{formatDate(r.date)} {r.hive ? `• ${t('dashboard.hiveNumber')}${r.hive.number}` : ''} {r.customer ? `• ${r.customer}` : ''}</p>
-                  {r.description && <p className="text-sm text-stone-600 mt-1">{r.description}</p>}
+                  {r.description && <p className="text-sm text-stone-600 mt-1 dark:text-stone-400">{r.description}</p>}
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-emerald-600">{formatMoney(r.amount)}</span>
-                  <button onClick={() => { setEditingRev(r); setRevForm(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg"><Pencil className="h-4 w-4" /></button>
-                  <button onClick={() => setDeleting({ type: 'revenue', id: r.id })} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg"><Trash2 className="h-4 w-4" /></button>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">{formatMoney(r.amount)}</span>
+                  <button onClick={() => { setEditingRev(r); setRevForm(true); }} className="p-1.5 text-stone-400 hover:text-honey-600 hover:bg-stone-100 rounded-lg dark:hover:bg-stone-800"><Pencil className="h-4 w-4" /></button>
+                  <button onClick={() => setDeleting({ type: 'revenue', id: r.id })} className="p-1.5 text-stone-400 hover:text-red-600 hover:bg-red-50 rounded-lg dark:hover:bg-red-900/30"><Trash2 className="h-4 w-4" /></button>
                 </div>
               </div>
             </Card>

@@ -67,12 +67,12 @@ export const QueensList = () => {
           {queens.map((queen) => (
             <Card key={queen.id} className="p-4">
               <div className="flex items-center gap-3">
-                <div className="h-11 w-11 rounded-xl bg-amber-100 flex items-center justify-center">
-                  <Crown className="h-6 w-6 text-amber-600" />
+                <div className="h-11 w-11 rounded-xl bg-amber-100 flex items-center justify-center dark:bg-amber-900/40">
+                  <Crown className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-stone-800">{queen.race || '—'}</p>
-                  <p className="text-sm text-stone-500">{queen.hive ? `${t('dashboard.hiveNumber')}${queen.hive.number}` : ''}</p>
+                  <p className="font-semibold text-stone-800 dark:text-stone-100">{queen.race || '—'}</p>
+                  <p className="text-sm text-stone-500 dark:text-stone-400">{queen.hive ? `${t('dashboard.hiveNumber')}${queen.hive.number}` : ''}</p>
                 </div>
                 {queen.quality && <Badge color={queen.quality === 'Excellent' ? 'emerald' : queen.quality === 'Good' ? 'green' : 'yellow'}>{queen.quality}</Badge>}
               </div>
