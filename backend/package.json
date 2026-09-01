@@ -9,7 +9,7 @@
     "start:prod": "npm run migrate:deploy && node src/index.js",
     "dev": "node --watch src/index.js",
     "build": "npx prisma generate && npm run build:frontend",
-    "build:frontend": "cd ../frontend && npm install && npm run build && node -e \"require('fs').rmSync('../backend/public',{recursive:true,force:true});require('fs').mkdirSync('../backend/public',{recursive:true});require('fs').cpSync('dist','../backend/public',{recursive:true})\"",
+    "build:frontend": "cd ../frontend && npm install --include=dev && npm run build && node -e \"require('fs').rmSync('../backend/public',{recursive:true,force:true});require('fs').mkdirSync('../backend/public',{recursive:true});require('fs').cpSync('dist','../backend/public',{recursive:true})\"",
     "migrate:deploy": "npx prisma migrate deploy",
     "seed": "node prisma/seed.js",
     "postinstall": "npx prisma generate"
