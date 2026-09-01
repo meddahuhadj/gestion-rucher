@@ -1,0 +1,32 @@
+# Render Blueprint — Gestion de Rucher
+# Déploiement mono-service : le backend Express sert aussi le frontend buildé (PWA).
+services:
+  - type: web
+    name: rucher-api
+    runtime: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        sync: false # à définir dans le dashboard Render
+      - key: JWT_EXPIRES
+        value: 7d
+      - key: PUBLIC_URL
+        fromService:
+          type: web
+          name: rucher-api
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: DATABASE_URL
+        fromDatabase:
+          name: rucher-db
+          property: connectionString
+
+databases:
+  - name: rucher-db
+    plan: free
+    databaseName: rucher
+    user: rucher

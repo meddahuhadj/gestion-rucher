@@ -1,0 +1,293 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  createdAt DateTime @default(now())
+
+  members WorkspaceMember[]
+  apiaries Apiary[]
+  hives Hive[]
+  inspections Inspection[]
+  tasks Task[]
+  harvests Harvest[]
+  expenses Expense[]
+  revenues Revenue[]
+}
+
+model WorkspaceMember {
+  id          String   @id @default(cuid())
+  role        String   @default("MEMBER")
+  createdAt   DateTime @default(now())
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, workspaceId])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  currency  String   @default("DZD")
+  language  String   @default("ar")
+  reminderDays Int   @default(1)
+  currentWorkspaceId String?
+  createdAt DateTime @default(now())
+
+  memberships    WorkspaceMember[]
+  notifications  Notification[]
+  apiaries       Apiary[]
+  hives          Hive[]
+  inspections    Inspection[]
+  tasks          Task[]
+  harvests       Harvest[]
+  expenses       Expense[]
+  revenues       Revenue[]
+}
+
+model Apiary {
+  id          String   @id @default(cuid())
+  name        String
+  location    String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  hives Hive[]
+
+  @@index([workspaceId])
+}
+
+model Hive {
+  id             String    @id @default(cuid())
+  number         Int
+  name           String?
+  origin         String?
+  type           String?
+  beeRace        String?
+  status         String    @default("ACTIVE")
+  strength       String    @default("MEDIUM")
+  queenPresent   Boolean   @default(true)
+  queenAge       Int?
+  queenIntroDate DateTime?
+  lastInspection DateTime?
+  nextInspection DateTime?
+  notes          String?
+  photo          String?
+  createdAt      DateTime  @default(now())
+
+  apiaryId String
+  apiary   Apiary @relation(fields: [apiaryId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  inspections Inspection[]
+  tasks       Task[]
+  queens      Queen[]
+  harvests    Harvest[]
+  expenses    Expense[]
+  revenues    Revenue[]
+
+  @@index([apiaryId])
+  @@index([workspaceId])
+  @@index([status])
+}
+
+model Inspection {
+  id            String    @id @default(cuid())
+  date          DateTime  @default(now())
+  time          String?
+  temperature   Float?
+  weather       String?
+  strength      String
+  queenPresent  Boolean?
+  queenSeen     Boolean?
+  layingPattern String?
+  broodQuantity String?
+  broodCondition String?
+  honeyStores   String?
+  pollenStores  String?
+  foodAvailable Boolean?
+  healthStatus  String?
+  parasites     String?
+  diseases      String?
+  observations  String?
+  photos        String?
+  createdAt     DateTime  @default(now())
+
+  hiveId String
+  hive   Hive   @relation(fields: [hiveId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([hiveId])
+  @@index([date])
+  @@index([workspaceId])
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  type        String
+  date        DateTime @default(now())
+  time        String?
+  priority    String   @default("NORMAL")
+  status      String   @default("TODO")
+  description String?
+  createdAt   DateTime @default(now())
+
+  hiveId String?
+  hive   Hive?  @relation(fields: [hiveId], references: [id], onDelete: SetNull)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([hiveId])
+  @@index([status])
+  @@index([date])
+  @@index([workspaceId])
+}
+
+model Queen {
+  id              String    @id @default(cuid())
+  origin          String?
+  race            String?
+  age             Int?
+  introductionDate DateTime?
+  quality         String?
+  broodProduction String?
+  notes           String?
+  createdAt       DateTime  @default(now())
+
+  hiveId String
+  hive   Hive   @relation(fields: [hiveId], references: [id], onDelete: Cascade)
+
+  @@index([hiveId])
+}
+
+model Harvest {
+  id         String   @id @default(cuid())
+  date       DateTime @default(now())
+  honeyType  String?
+  quantity   Int?
+  weight     Float?
+  jars       Int?
+  unitPrice  Float?
+  totalPrice Float?
+  lot        String?
+  notes      String?
+  photos     String?
+  createdAt  DateTime @default(now())
+
+  hiveId String
+  hive   Hive   @relation(fields: [hiveId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([hiveId])
+  @@index([date])
+  @@index([workspaceId])
+}
+
+model Expense {
+  id          String   @id @default(cuid())
+  date        DateTime @default(now())
+  amount      Float
+  category    String
+  description String?
+  reason      String?
+  photo       String?
+  createdAt   DateTime @default(now())
+
+  hiveId String?
+  hive   Hive?  @relation(fields: [hiveId], references: [id], onDelete: SetNull)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([hiveId])
+  @@index([category])
+  @@index([date])
+  @@index([workspaceId])
+}
+
+model Revenue {
+  id          String   @id @default(cuid())
+  date        DateTime @default(now())
+  amount      Float
+  type        String
+  product     String?
+  quantity    Int?
+  unitPrice   Float?
+  totalPrice  Float?
+  customer    String?
+  description String?
+  createdAt   DateTime @default(now())
+
+  hiveId String?
+  hive   Hive?  @relation(fields: [hiveId], references: [id], onDelete: SetNull)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([hiveId])
+  @@index([type])
+  @@index([date])
+  @@index([workspaceId])
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  title       String
+  message     String
+  type        String   @default("INFO")
+  read        Boolean  @default(false)
+  relatedId   String?
+  relatedType String?
+  createdAt   DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+}

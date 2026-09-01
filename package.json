@@ -1,0 +1,16 @@
+{
+  "name": "gestion-rucher",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "npm install --prefix backend && npm install --prefix frontend && cd backend && npx prisma migrate deploy",
+    "db:migrate": "cd backend && npx prisma migrate dev",
+    "db:seed": "cd backend && node prisma/seed.js",
+    "dev:backend": "cd backend && node src/index.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
