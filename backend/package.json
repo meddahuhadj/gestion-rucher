@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "start:prod": "prisma migrate resolve --rolled-back 20260901120000_init --schema=prisma/schema.prisma; prisma migrate deploy --schema=prisma/schema.prisma && node src/index.js",
+    "start:prod": "prisma db push --schema=prisma/schema.prisma --accept-data-loss && node src/index.js",
     "dev": "node --watch src/index.js",
     "build": "npm install && npx prisma generate --schema=prisma/schema.prisma && npm run build:frontend",
     "build:frontend": "cd ../frontend && npm install --include=dev && npm run build && node -e \"require('fs').rmSync('../backend/public',{recursive:true,force:true});require('fs').mkdirSync('../backend/public',{recursive:true});require('fs').cpSync('dist','../backend/public',{recursive:true})\"",
