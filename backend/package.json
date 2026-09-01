@@ -8,11 +8,11 @@
     "start": "node src/index.js",
     "start:prod": "npm run migrate:deploy && node src/index.js",
     "dev": "node --watch src/index.js",
-    "build": "prisma generate && npm run build:frontend",
+    "build": "npx prisma generate && npm run build:frontend",
     "build:frontend": "cd ../frontend && npm install && npm run build && node -e \"require('fs').rmSync('../backend/public',{recursive:true,force:true});require('fs').mkdirSync('../backend/public',{recursive:true});require('fs').cpSync('dist','../backend/public',{recursive:true})\"",
-    "migrate:deploy": "prisma migrate deploy",
+    "migrate:deploy": "npx prisma migrate deploy",
     "seed": "node prisma/seed.js",
-    "postinstall": "prisma generate"
+    "postinstall": "npx prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -21,11 +21,10 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "multer": "^2.3.0"
-  },
-  "devDependencies": {
+    "multer": "^2.3.0",
     "prisma": "^5.22.0"
   },
+  "devDependencies": {},
   "engines": {
     "node": ">=18"
   },
