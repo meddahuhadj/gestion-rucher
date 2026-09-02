@@ -235,7 +235,7 @@ export const InspectionForm = () => {
 
       {error && <p className="text-red-600">{error}</p>}
 
-      <div className="flex gap-3 justify-end">
+      <div className="flex gap-3 justify-end max-lg:sticky max-lg:bottom-0 max-lg:z-10 max-lg:-mx-4 max-lg:px-4 max-lg:py-3 max-lg:pb-[calc(0.75rem_+_env(safe-area-inset-bottom))] max-lg:border-t max-lg:border-stone-200 max-lg:bg-stone-50/95 max-lg:backdrop-blur max-lg:dark:border-stone-800 max-lg:dark:bg-stone-950/95">
         <Button variant="secondary" onClick={() => navigate(-1)}>{t('common.cancel')}</Button>
         <Button type="submit" onClick={handleSubmit}>{t('common.save')}</Button>
       </div>

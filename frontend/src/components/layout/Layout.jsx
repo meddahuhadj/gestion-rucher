@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LayoutDashboard, Warehouse, Hexagon, Search, ClipboardList, Calendar,
   Crown, Droplets, Wallet, BarChart3, Settings, LogOut, X, Menu, Bell,
@@ -40,6 +40,10 @@ export const Layout = () => {
   const { workspaces, active, setActive } = useWorkspace();
   const { dark, toggle } = useTheme();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  // Full-page forms (add / edit) : on mobile the bottom tab bar is hidden so it
+  // never covers the Save / Cancel buttons.
+  const isFormPage = /\/(new|edit)$/.test(pathname);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [wsOpen, setWsOpen] = useState(false);
 
@@ -179,11 +183,15 @@ export const Layout = () => {
           </div>
         </header>
 
-        <main className="flex-1 p-4 max-lg:pb-[calc(6rem_+_env(safe-area-inset-bottom))] lg:p-6 max-w-7xl w-full mx-auto">
+        <main className={`flex-1 p-4 lg:p-6 max-w-7xl w-full mx-auto ${
+          isFormPage
+            ? 'max-lg:pb-[env(safe-area-inset-bottom)]'
+            : 'max-lg:pb-[calc(6rem_+_env(safe-area-inset-bottom))]'
+        }`}>
           <Outlet />
         </main>
 
-        <nav className="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white border-t border-stone-200 flex justify-around py-2 pb-[env(safe-area-inset-bottom)] dark:bg-stone-900 dark:border-stone-800">
+        <nav className={`${isFormPage ? 'hidden' : 'lg:hidden'} fixed bottom-0 inset-x-0 z-30 bg-white border-t border-stone-200 flex justify-around py-2 pb-[env(safe-area-inset-bottom)] dark:bg-stone-900 dark:border-stone-800`}>
           {MOBILE_NAV.map((item) => (
             <NavLink
               key={item.to}
