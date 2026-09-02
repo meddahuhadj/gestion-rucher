@@ -3,7 +3,7 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LayoutDashboard, Warehouse, Hexagon, Search, ClipboardList, Calendar,
   Crown, Droplets, Wallet, BarChart3, Settings, LogOut, X, Menu, Bell,
-  Check, Sun, Moon } from 'lucide-react';
+  Check, Sun, Moon, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
@@ -11,6 +11,8 @@ import { useTheme } from '../../context/ThemeContext';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { NotificationBell } from '../common/NotificationBell';
 import { Outlet } from 'react-router-dom';
+import { AssistantProvider } from '../../assistant/AssistantContext';
+import { AssistantFab } from '../../assistant/AssistantFab';
 
 const NAV_ITEMS = [
   { to: '/', icon: LayoutDashboard, key: 'dashboard' },
@@ -23,6 +25,7 @@ const NAV_ITEMS = [
   { to: '/harvests', icon: Droplets, key: 'harvests' },
   { to: '/finances', icon: Wallet, key: 'finances' },
   { to: '/statistics', icon: BarChart3, key: 'statistics' },
+  { to: '/assistant', icon: Bot, key: 'assistant' },
   { to: '/settings', icon: Settings, key: 'settings' },
 ];
 
@@ -133,6 +136,7 @@ export const Layout = () => {
   );
 
   return (
+    <AssistantProvider>
     <div className="min-h-screen flex bg-stone-50 dark:bg-stone-950">
       <aside className="hidden lg:flex w-64 bg-white border-e border-stone-100 fixed inset-y-0 start-0 z-40 dark:bg-stone-900 dark:border-stone-800">
         {sidebar}
@@ -210,5 +214,7 @@ export const Layout = () => {
         </nav>
       </div>
     </div>
+    <AssistantFab />
+    </AssistantProvider>
   );
 };

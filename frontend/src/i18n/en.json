@@ -31,9 +31,44 @@
     "harvests": "Production",
     "finances": "Finances",
     "statistics": "Statistics",
+    "assistant": "Assistant",
     "notifications": "Notifications",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "assistant": {
+    "title": "HADJ Assistant",
+    "subtitle": "Real-time voice, vision and actions",
+    "start": "Start",
+    "stop": "Stop",
+    "cameraOn": "Turn camera on",
+    "cameraOff": "Turn camera off",
+    "clear": "Clear conversation",
+    "changeKey": "Change API key",
+    "you": "You",
+    "assistant": "Assistant",
+    "emptyHint": "Tap Start and speak: \"How many active hives?\", \"Add feeding for hive 3\", \"Log a 12 kg harvest for hive 7\"…",
+    "typePlaceholder": "Type a message…",
+    "startFirst": "Start the assistant to type",
+    "openFull": "Open full screen",
+    "privacyNote": "The assistant uses the Google Gemini API. Your microphone, camera and apiary data are sent during the session. The API key stays on this device.",
+    "apiKeyTitle": "Gemini API key",
+    "apiKeyHelp": "Enter your Gemini API key to use the assistant. You can get one for free at",
+    "apiKeyPlaceholder": "Paste your API key…",
+    "status": {
+      "IDLE": "Idle",
+      "CONNECTING": "Connecting…",
+      "LISTENING": "Listening",
+      "SPEAKING": "Assistant speaking",
+      "ERROR": "Error"
+    },
+    "actionDone": {
+      "generic": "Item created — open",
+      "tasks": "Task created — view tasks",
+      "inspections": "Inspection saved — view inspections",
+      "harvests": "Harvest saved — view production",
+      "hives": "Hive added — view hives"
+    }
   },
   "auth": {
     "login": "Login",

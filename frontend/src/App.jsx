@@ -21,6 +21,7 @@ import { CalendarPage } from './pages/calendar/CalendarPage';
 import { StatisticsPage } from './pages/statistics/StatisticsPage';
 import { NotificationsPage } from './pages/notifications/NotificationsPage';
 import { SettingsPage } from './pages/settings/SettingsPage';
+import { AssistantPage } from './pages/assistant/AssistantPage';
 import { Spinner } from './components/ui';
 
 const ProtectedRoute = ({ children }) => {
@@ -61,6 +62,7 @@ const AppRoutes = () => {
         <Route path="/statistics" element={<StatisticsPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/assistant" element={<AssistantPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

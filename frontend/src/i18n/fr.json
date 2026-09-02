@@ -31,9 +31,44 @@
     "harvests": "Production",
     "finances": "Finances",
     "statistics": "Statistiques",
+    "assistant": "Assistant",
     "notifications": "Notifications",
     "settings": "Paramètres",
     "logout": "Déconnexion"
+  },
+  "assistant": {
+    "title": "Assistant HADJ",
+    "subtitle": "Voix, vision et actions en temps réel",
+    "start": "Démarrer",
+    "stop": "Arrêter",
+    "cameraOn": "Activer la caméra",
+    "cameraOff": "Couper la caméra",
+    "clear": "Effacer la conversation",
+    "changeKey": "Changer la clé API",
+    "you": "Vous",
+    "assistant": "Assistant",
+    "emptyHint": "Appuie sur Démarrer et parle : « Combien de ruches actives ? », « Ajoute un nourrissement pour la ruche 3 », « Récolte de 12 kg sur la ruche 7 »…",
+    "typePlaceholder": "Écrire un message…",
+    "startFirst": "Démarre l'assistant pour écrire",
+    "openFull": "Ouvrir en plein écran",
+    "privacyNote": "L'assistant utilise l'API Google Gemini. Le micro, la caméra et vos données de rucher lui sont envoyés pendant la session. La clé API reste sur cet appareil.",
+    "apiKeyTitle": "Clé API Gemini",
+    "apiKeyHelp": "Saisis ta clé API Gemini pour utiliser l'assistant. Tu peux l'obtenir gratuitement sur",
+    "apiKeyPlaceholder": "Colle ta clé API…",
+    "status": {
+      "IDLE": "Inactif",
+      "CONNECTING": "Connexion…",
+      "LISTENING": "À l'écoute",
+      "SPEAKING": "L'assistant parle",
+      "ERROR": "Erreur"
+    },
+    "actionDone": {
+      "generic": "Élément créé — ouvrir",
+      "tasks": "Travail créé — voir les travaux",
+      "inspections": "Inspection enregistrée — voir les inspections",
+      "harvests": "Récolte enregistrée — voir la production",
+      "hives": "Ruche ajoutée — voir les ruches"
+    }
   },
   "auth": {
     "login": "Connexion",
