@@ -13,6 +13,7 @@ import revenueRoutes from './revenue.routes.js';
 import notificationRoutes from './notification.routes.js';
 import statsRoutes from './stats.routes.js';
 import uploadRoutes from './upload.routes.js';
+import backupRoutes from './backup.routes.js';
 import { auth } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -30,5 +31,6 @@ router.use('/expenses', expenseRoutes);
 router.use('/revenues', revenueRoutes);
 router.use('/notifications', notificationRoutes);
 router.use('/stats', statsRoutes);
+router.use('/backup', backupRoutes);
 
 export default router;

@@ -289,7 +289,15 @@
     "data": "Données",
     "export": "Exporter",
     "import": "Importer",
-    "backup": "Sauvegarde"
+    "backup": "Sauvegarde",
+    "exportHint": "Télécharge un fichier avec toutes les données de cet espace (ruchers, ruches, visites, tâches, récoltes, finances). À conserver dans Google Drive ou ailleurs.",
+    "importTitle": "Importer une sauvegarde",
+    "importHint": "Choisis un fichier .json exporté depuis cette application.",
+    "importConfirm": "Toutes les données actuelles de l'espace « {{name}} » vont être effacées et remplacées par celles du fichier. Continuer ?",
+    "importDone": "Import terminé ✅",
+    "importOwnerOnly": "Seul l'administrateur de l'espace peut importer une sauvegarde.",
+    "importBadFile": "Fichier invalide : ce n'est pas une sauvegarde de l'application.",
+    "working": "En cours…"
   },
   "hiveStatus": {
     "ACTIVE": "Active",

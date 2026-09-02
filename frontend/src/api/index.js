@@ -93,6 +93,11 @@ export const statsApi = {
   overview: () => client.get('/stats/overview').then(unwrap),
 };
 
+export const backupApi = {
+  export: () => client.get('/backup/export').then((res) => res.data),
+  import: (data) => client.post('/backup/import', data).then(unwrap),
+};
+
 export const uploadApi = {
   upload: (files) => {
     const formData = new FormData();

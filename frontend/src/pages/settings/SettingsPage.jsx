@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Settings as SettingsIcon, Download, Upload, KeyRound, Users, Copy, UserMinus, UserCog, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
-import { authApi } from '../../api';
+import { authApi, backupApi } from '../../api';
 import { PageHeader } from '../../components/layout/PageHeader';
 import { Card, CardHeader, CardBody, Button, Input, Select, ConfirmDialog } from '../../components/ui';
 
@@ -15,6 +15,9 @@ export const SettingsPage = () => {
   const [removeTarget, setRemoveTarget] = useState(null);
   const [confirmLeave, setConfirmLeave] = useState(false);
   const [transferTarget, setTransferTarget] = useState(null);
+  const fileInputRef = useRef(null);
+  const [pendingImport, setPendingImport] = useState(null);
+  const [busy, setBusy] = useState(false);
 
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
@@ -75,18 +78,65 @@ export const SettingsPage = () => {
     setTransferTarget(null);
   };
 
-  const exportData = () => {
-    const data = {
-      user: { name, email, currency, language, reminderDays },
-      lang: i18n.language,
+  const exportData = async () => {
+    setMessage('');
+    setError('');
+    setBusy(true);
+    try {
+      const payload = await backupApi.export();
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+      a.download = `rucher-${stamp}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      setError(e.response?.data?.message || 'Error');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const onFilePicked = (e) => {
+    setMessage('');
+    setError('');
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (!parsed || parsed.format !== 'rucher-backup') {
+          setError(t('settings.importBadFile'));
+          return;
+        }
+        setPendingImport(parsed);
+      } catch {
+        setError(t('settings.importBadFile'));
+      }
     };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'rucher-export.json';
-    a.click();
-    URL.revokeObjectURL(url);
+    reader.readAsText(file);
+  };
+
+  const confirmImport = async () => {
+    if (!pendingImport) return;
+    setBusy(true);
+    setMessage('');
+    setError('');
+    try {
+      await backupApi.import(pendingImport);
+      setPendingImport(null);
+      setMessage(t('settings.importDone'));
+      setTimeout(() => window.location.reload(), 900);
+    } catch (e) {
+      setError(e.response?.data?.message || 'Error');
+      setPendingImport(null);
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -228,15 +278,44 @@ export const SettingsPage = () => {
 
       <Card>
         <CardHeader><h2 className="font-semibold text-stone-800 dark:text-stone-100">💾 {t('settings.data')}</h2></CardHeader>
-        <CardBody className="space-y-3">
-          <Button variant="secondary" onClick={exportData}>
-            <Download className="h-4 w-4" /> {t('settings.export')}
-          </Button>
-          <Button variant="secondary" disabled>
-            <Upload className="h-4 w-4" /> {t('settings.import')}
-          </Button>
+        <CardBody className="space-y-5">
+          <div className="space-y-2">
+            <Button variant="secondary" onClick={exportData} disabled={busy}>
+              <Download className="h-4 w-4" /> {busy ? t('settings.working') : t('settings.export')}
+            </Button>
+            <p className="text-xs text-stone-400">{t('settings.exportHint')}</p>
+          </div>
+
+          <div className="space-y-2 pt-1 border-t border-stone-100 dark:border-stone-800">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="application/json,.json"
+              className="hidden"
+              onChange={onFilePicked}
+            />
+            <Button
+              variant="secondary"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={busy || myRole !== 'OWNER'}
+            >
+              <Upload className="h-4 w-4" /> {t('settings.import')}
+            </Button>
+            <p className="text-xs text-stone-400">
+              {myRole === 'OWNER' ? t('settings.importHint') : t('settings.importOwnerOnly')}
+            </p>
+          </div>
         </CardBody>
       </Card>
+
+      <ConfirmDialog
+        open={!!pendingImport}
+        title={t('settings.importTitle')}
+        message={t('settings.importConfirm', { name: active?.name || '' })}
+        confirmText={t('settings.import')}
+        onConfirm={confirmImport}
+        onClose={() => setPendingImport(null)}
+      />
     </div>
   );
 };

@@ -289,7 +289,15 @@
     "data": "Data",
     "export": "Export",
     "import": "Import",
-    "backup": "Backup"
+    "backup": "Backup",
+    "exportHint": "Download a file with all this workspace's data (apiaries, hives, inspections, tasks, harvests, finances). Keep it in Google Drive or elsewhere.",
+    "importTitle": "Import a backup",
+    "importHint": "Choose a .json file exported from this app.",
+    "importConfirm": "All current data in workspace \"{{name}}\" will be erased and replaced with the file's contents. Continue?",
+    "importDone": "Import complete ✅",
+    "importOwnerOnly": "Only the workspace owner can import a backup.",
+    "importBadFile": "Invalid file: this is not an app backup.",
+    "working": "Working…"
   },
   "hiveStatus": {
     "ACTIVE": "Active",
