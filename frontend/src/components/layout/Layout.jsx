@@ -179,7 +179,7 @@ export const Layout = () => {
           </div>
         </header>
 
-        <main className="flex-1 p-4 lg:p-6 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-4 max-lg:pb-[calc(6rem_+_env(safe-area-inset-bottom))] lg:p-6 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>
 
