@@ -22,6 +22,23 @@ Aucune cle secrete n'est dans le code : tout passe par des **secrets GitHub**.
 
 ## 2. Configuration (a faire une seule fois)
 
+### Chemin rapide (Windows) : le script tout-en-un
+
+Depuis la racine du projet :
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\setup-backup.ps1
+```
+
+Il installe rclone, lance l'autorisation Google, verifie GitHub CLI, cree les
+deux secrets et declenche une premiere sauvegarde. Il te reste seulement a :
+te connecter a Google dans la fenetre qui s'ouvre, te connecter a GitHub si
+demande, et coller l'External Database URL de Render quand il est demande.
+
+Les sections 2.1 a 2.4 ci-dessous decrivent les memes etapes a la main.
+
+
+
 ### 2.1. Autoriser rclone a acceder a ton Google Drive
 
 Sur ta machine (Windows : installer rclone depuis https://rclone.org/downloads/) :
