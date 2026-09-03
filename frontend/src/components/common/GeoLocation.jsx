@@ -53,7 +53,7 @@ export const GeoLocation = ({ compact = false }) => {
             compact ? 'text-[11px]' : 'text-xs'
           }`}
         >
-          {compact ? `${geo.lat.toFixed(3)}, ${geo.lng.toFixed(3)}` : formatCoords(geo.lat, geo.lng)}
+          {compact ? `${geo.lat.toFixed(4)}, ${geo.lng.toFixed(4)}` : formatCoords(geo.lat, geo.lng)}
         </a>
       ) : (
         <button

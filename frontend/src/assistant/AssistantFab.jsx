@@ -17,8 +17,8 @@ export const AssistantFab = () => {
       <button
         onClick={() => setOpen(true)}
         aria-label={t('assistant.title')}
-        className={`fixed z-40 bottom-20 end-4 lg:bottom-6 lg:end-6 rounded-full shadow-lg flex items-center justify-center text-white transition-transform hover:scale-105 active:scale-95 ${
-          glove ? 'h-20 w-20' : 'h-14 w-14'
+        className={`fixed z-40 end-4 lg:end-6 bottom-[calc(4.75rem+env(safe-area-inset-bottom))] lg:bottom-6 rounded-full shadow-lg flex items-center justify-center text-white transition-transform hover:scale-105 active:scale-95 ${
+          glove ? 'h-16 w-16 lg:h-20 lg:w-20' : 'h-14 w-14'
         } ${isActive ? 'bg-violet-600' : 'bg-honey-500'} ${open ? 'hidden' : ''}`}
       >
         <Bot className={glove ? 'h-10 w-10' : 'h-6 w-6'} />

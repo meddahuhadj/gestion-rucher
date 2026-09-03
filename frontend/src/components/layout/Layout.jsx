@@ -154,45 +154,46 @@ export const Layout = () => {
       )}
 
       <div className="flex-1 lg:ms-64 flex flex-col min-h-screen">
-        <header className="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-stone-100 px-4 py-3 flex items-center justify-between lg:hidden dark:bg-stone-900/80 dark:border-stone-800">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setSidebarOpen(true)} className="p-2 text-stone-600 hover:bg-stone-100 rounded-lg dark:text-stone-300 dark:hover:bg-stone-800">
-              <Menu className="h-5 w-5" />
-            </button>
-            <Link to="/" className="font-bold text-stone-800 flex items-center gap-2 dark:text-stone-100">
-              <span className="text-xl">🐝</span> {t('appName')}
-            </Link>
+        <div className="lg:hidden sticky top-0 z-30">
+          <header className="bg-white/80 backdrop-blur border-b border-stone-100 px-4 py-3 flex items-center justify-between dark:bg-stone-900/80 dark:border-stone-800">
+            <div className="flex items-center gap-2 min-w-0">
+              <button onClick={() => setSidebarOpen(true)} className="p-2 text-stone-600 hover:bg-stone-100 rounded-lg dark:text-stone-300 dark:hover:bg-stone-800 shrink-0">
+                <Menu className="h-5 w-5" />
+              </button>
+              <Link to="/" className="font-bold text-stone-800 flex items-center gap-1.5 min-w-0 dark:text-stone-100">
+                <span className="text-xl shrink-0">🐝</span>
+                <span className="truncate">{t('appName')}</span>
+              </Link>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={toggleGlove}
+                aria-label={t('glove.toggle')}
+                title={t('glove.toggle')}
+                className={`p-2 rounded-lg ${
+                  glove
+                    ? 'bg-honey-100 text-honey-700 dark:bg-honey-900/40 dark:text-honey-300'
+                    : 'text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100'
+                }`}
+              >
+                <Hand className="h-5 w-5" />
+              </button>
+              <button
+                onClick={toggle}
+                aria-label="Toggle theme"
+                className="p-2 rounded-lg text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100"
+              >
+                {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </button>
+              <LanguageSwitcher compact />
+              <NotificationBell />
+            </div>
+          </header>
+          <div className="flex items-center justify-between gap-2 bg-white/70 backdrop-blur border-b border-stone-100 px-4 py-1.5 dark:bg-stone-900/70 dark:border-stone-800">
+            <Clock compact />
+            <GeoLocation compact />
           </div>
-          <div className="flex items-center gap-2">
-            <span className="hidden min-[360px]:inline-block me-1.5">
-              <Clock compact />
-            </span>
-            <span className="hidden min-[460px]:inline-block me-1.5">
-              <GeoLocation compact />
-            </span>
-            <button
-              onClick={toggleGlove}
-              aria-label={t('glove.toggle')}
-              title={t('glove.toggle')}
-              className={`p-2 rounded-lg ${
-                glove
-                  ? 'bg-honey-100 text-honey-700 dark:bg-honey-900/40 dark:text-honey-300'
-                  : 'text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100'
-              }`}
-            >
-              <Hand className="h-5 w-5" />
-            </button>
-            <button
-              onClick={toggle}
-              aria-label="Toggle theme"
-              className="p-2 rounded-lg text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100"
-            >
-              {dark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
-            <LanguageSwitcher />
-            <NotificationBell />
-          </div>
-        </header>
+        </div>
 
         <header className="hidden lg:flex sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-stone-100 px-6 py-3 items-center justify-between dark:bg-stone-900/80 dark:border-stone-800">
           <div className="w-56"><WorkspaceSwitcher /></div>
