@@ -79,6 +79,10 @@
     "toggle": "Glove mode",
     "hint": "Enlarges the whole interface and switches the assistant to a full-screen voice screen, for use with gloves at the hive."
   },
+  "sound": {
+    "toggle": "Click beep",
+    "hint": "Plays a short sound every time a button is pressed."
+  },
   "auth": {
     "login": "Login",
     "register": "Create account",

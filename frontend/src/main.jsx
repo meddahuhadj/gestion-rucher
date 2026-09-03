@@ -6,8 +6,11 @@ import { AuthProvider } from './context/AuthContext';
 import { WorkspaceProvider } from './context/WorkspaceContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { GloveProvider } from './context/GloveContext';
+import { initClickSound } from './utils/clickSound';
 import './i18n';
 import './index.css';
+
+initClickSound();
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {

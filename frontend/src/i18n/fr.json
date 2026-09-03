@@ -79,6 +79,10 @@
     "toggle": "Mode gants",
     "hint": "Agrandit toute l'interface et passe l'assistant en écran vocal plein écran, pour une utilisation avec des gants au rucher."
   },
+  "sound": {
+    "toggle": "Bip au clic",
+    "hint": "Joue un petit son à chaque appui sur un bouton."
+  },
   "auth": {
     "login": "Connexion",
     "register": "Créer un compte",

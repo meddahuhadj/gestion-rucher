@@ -4,6 +4,7 @@ import { Settings as SettingsIcon, Download, Upload, KeyRound, Users, Copy, User
 import { useAuth } from '../../context/AuthContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
 import { useGlove } from '../../context/GloveContext';
+import { isClickSoundEnabled, setClickSoundEnabled } from '../../utils/clickSound';
 import { authApi, backupApi } from '../../api';
 import { PageHeader } from '../../components/layout/PageHeader';
 import { Card, CardHeader, CardBody, Button, Input, Select, ConfirmDialog } from '../../components/ui';
@@ -13,6 +14,7 @@ export const SettingsPage = () => {
   const { user, updateUser } = useAuth();
   const { active, members, myRole, removeMember, leaveWorkspace, transferOwner } = useWorkspace();
   const { glove, toggle: toggleGlove } = useGlove();
+  const [clickSound, setClickSound] = useState(isClickSoundEnabled());
   const [copied, setCopied] = useState(false);
   const [removeTarget, setRemoveTarget] = useState(null);
   const [confirmLeave, setConfirmLeave] = useState(false);
@@ -271,7 +273,7 @@ export const SettingsPage = () => {
 
       <Card>
         <CardHeader><h2 className="font-semibold text-stone-800 flex items-center gap-2 dark:text-stone-100"><Hand className="h-4 w-4" /> {t('settings.display')}</h2></CardHeader>
-        <CardBody>
+        <CardBody className="space-y-4">
           <div className="flex items-center gap-3">
             <div className="flex-1">
               <p className="text-sm font-medium text-stone-800 dark:text-stone-100">{t('glove.toggle')}</p>
@@ -289,6 +291,28 @@ export const SettingsPage = () => {
               <span
                 className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
                   glove ? 'translate-x-5 rtl:-translate-x-5' : 'translate-x-0.5'
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3 pt-3 border-t border-stone-100 dark:border-stone-800">
+            <div className="flex-1">
+              <p className="text-sm font-medium text-stone-800 dark:text-stone-100">{t('sound.toggle')}</p>
+              <p className="text-xs text-stone-400">{t('sound.hint')}</p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={clickSound}
+              onClick={() => { const next = !clickSound; setClickSound(next); setClickSoundEnabled(next); }}
+              className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${
+                clickSound ? 'bg-honey-500' : 'bg-stone-300 dark:bg-stone-700'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
+                  clickSound ? 'translate-x-5 rtl:-translate-x-5' : 'translate-x-0.5'
                 }`}
               />
             </button>
