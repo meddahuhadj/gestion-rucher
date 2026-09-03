@@ -5,6 +5,7 @@
 import {
   apiaryApi, hiveApi, taskApi, inspectionApi, harvestApi, statsApi,
 } from '../api';
+import { requestGeo, getCachedGeo, formatCoords, mapUrl } from '../utils/geo';
 
 const TASK_TYPES = [
   'INSPECTION', 'DIVISION', 'RENFORCEMENT', 'FEEDING', 'ADD_SUGAR', 'ADD_SYRUP',
@@ -190,6 +191,29 @@ export const functionDeclarations = [
         theme: { type: 'STRING', enum: ['light', 'dark', 'toggle'], description: 'Thème' },
         gloveMode: { type: 'BOOLEAN', description: 'Activer (true) ou désactiver (false) le mode gants' },
       },
+    },
+  },
+  {
+    name: 'get_location',
+    description:
+      "Récupère la position GPS actuelle de l'utilisateur (via le navigateur). Utilise-le quand on demande « où suis-je ? », « ma position », ou avant d'enregistrer une position. Peut déclencher une demande d'autorisation la première fois.",
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        fresh: { type: 'BOOLEAN', description: 'true pour forcer une nouvelle lecture GPS au lieu de la dernière position connue' },
+      },
+    },
+  },
+  {
+    name: 'set_apiary_location',
+    description:
+      "Enregistre la position GPS actuelle de l'utilisateur comme emplacement d'un rucher (champ Emplacement). Confirme le nom du rucher avant.",
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        apiaryName: { type: 'STRING', description: 'Nom du rucher (approximatif)' },
+      },
+      required: ['apiaryName'],
     },
   },
 ];
@@ -475,6 +499,59 @@ export function createToolHandler({ onChange, ui } = {}) {
         }
         if (!applied.length) return { error: 'Aucun réglage fourni.' };
         return { ok: true, applied };
+      }
+
+      case 'get_location': {
+        const cached = getCachedGeo();
+        const stale = !cached || Date.now() - cached.ts > 5 * 60 * 1000;
+        let geo = cached;
+        if (args.fresh || stale) {
+          try {
+            geo = await requestGeo();
+          } catch (e) {
+            if (!geo) {
+              return {
+                error:
+                  e?.code === 1
+                    ? "Autorisation de localisation refusée."
+                    : "Position GPS indisponible.",
+              };
+            }
+          }
+        }
+        return {
+          ok: true,
+          lat: Number(geo.lat.toFixed(6)),
+          lng: Number(geo.lng.toFixed(6)),
+          coords: formatCoords(geo.lat, geo.lng),
+          accuracyMeters: geo.accuracy != null ? Math.round(geo.accuracy) : null,
+          ageSeconds: Math.round((Date.now() - geo.ts) / 1000),
+          mapUrl: mapUrl(geo.lat, geo.lng),
+        };
+      }
+
+      case 'set_apiary_location': {
+        const apiaryId = await resolveApiaryId(args.apiaryName);
+        if (!apiaryId) {
+          const apiaries = await loadApiaries();
+          return {
+            error: apiaries.length
+              ? `Rucher introuvable. Ruchers : ${apiaries.map((a) => a.name).join(', ')}`
+              : "Aucun rucher n'existe encore.",
+          };
+        }
+        let geo;
+        try {
+          geo = await requestGeo();
+        } catch {
+          geo = getCachedGeo();
+          if (!geo) return { error: 'Position GPS indisponible.' };
+        }
+        const coords = formatCoords(geo.lat, geo.lng);
+        const updated = await apiaryApi.update(apiaryId, { location: coords });
+        apiariesCache = null;
+        onChange?.('apiaries');
+        return { ok: true, apiary: updated.name, location: coords, mapUrl: mapUrl(geo.lat, geo.lng) };
       }
 
       default:

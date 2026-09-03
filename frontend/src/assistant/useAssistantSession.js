@@ -16,6 +16,7 @@ const buildSystemInstruction = ({ userName, workspaceName, currency, lang }) => 
     `Les ruches sont désignées par leur NUMÉRO. Avant de créer ou modifier une donnée, reformule brièvement ce que tu vas faire et attends la confirmation, sauf si la demande est déjà explicite et complète.`,
     `Après une action réussie, confirme en une phrase courte. Si un outil renvoie une erreur, explique-la simplement.`,
     `Tu peux aussi piloter l'interface à la voix : navigate_to pour ouvrir une page du menu, un formulaire ("nouvelle ruche", "nouvelle inspection") ou revenir en arrière ; set_display pour changer la langue, le thème clair/sombre ou le mode gants. Exécute ces demandes de navigation immédiatement, sans confirmation.`,
+    `Tu connais la position GPS de l'utilisateur : get_location pour la lire ("où suis-je ?", "ma position"), set_apiary_location pour l'enregistrer comme emplacement d'un rucher.`,
     `Tu disposes aussi de la caméra quand l'utilisateur l'active : tu peux alors décrire un cadre, du couvain, une reine, etc.`,
   ].join(' ');
 };
