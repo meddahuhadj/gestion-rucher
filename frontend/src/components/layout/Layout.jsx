@@ -12,6 +12,7 @@ import { useGlove } from '../../context/GloveContext';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { NotificationBell } from '../common/NotificationBell';
 import { Clock } from '../common/Clock';
+import { GeoLocation } from '../common/GeoLocation';
 import { Outlet } from 'react-router-dom';
 import { AssistantProvider } from '../../assistant/AssistantContext';
 import { AssistantFab } from '../../assistant/AssistantFab';
@@ -166,6 +167,9 @@ export const Layout = () => {
             <span className="hidden min-[360px]:inline-block me-1.5">
               <Clock compact />
             </span>
+            <span className="hidden min-[460px]:inline-block me-1.5">
+              <GeoLocation compact />
+            </span>
             <button
               onClick={toggleGlove}
               aria-label={t('glove.toggle')}
@@ -192,7 +196,10 @@ export const Layout = () => {
 
         <header className="hidden lg:flex sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-stone-100 px-6 py-3 items-center justify-between dark:bg-stone-900/80 dark:border-stone-800">
           <div className="w-56"><WorkspaceSwitcher /></div>
-          <Clock />
+          <div className="flex items-center gap-2">
+            <Clock />
+            <GeoLocation />
+          </div>
           <div className="flex items-center gap-3">
             <button
               onClick={toggleGlove}

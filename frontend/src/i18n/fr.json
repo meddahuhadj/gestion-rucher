@@ -83,6 +83,13 @@
     "toggle": "Bip au clic",
     "hint": "Joue un petit son à chaque appui sur un bouton."
   },
+  "geo": {
+    "locate": "Ma position",
+    "refresh": "Actualiser ma position",
+    "openMap": "Voir sur la carte",
+    "useMyLocation": "Utiliser ma position",
+    "error": "Position indisponible"
+  },
   "auth": {
     "login": "Connexion",
     "register": "Créer un compte",

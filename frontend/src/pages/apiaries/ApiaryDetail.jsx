@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ArrowRight, ExternalLink } from 'lucide-react';
 import { apiaryApi } from '../../api';
+import { parseCoords, formatCoords, mapUrl } from '../../utils/geo';
 import { HiveCard } from '../../components/common/HiveCard';
 import { Card, Spinner, EmptyState, Button, Badge } from '../../components/ui';
 import { formatDate } from '../../utils/format';
@@ -49,7 +50,21 @@ export const ApiaryDetail = () => {
         </div>
         <div>
           <h1 className="text-2xl font-bold text-stone-800 dark:text-stone-100">{apiary.name}</h1>
-          {apiary.location && <p className="text-stone-500 dark:text-stone-400">{apiary.location}</p>}
+          {apiary.location && (() => {
+            const c = parseCoords(apiary.location);
+            return c ? (
+              <a
+                href={mapUrl(c.lat, c.lng)}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-honey-600 hover:underline dark:text-honey-400"
+              >
+                {formatCoords(c.lat, c.lng)} <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            ) : (
+              <p className="text-stone-500 dark:text-stone-400">{apiary.location}</p>
+            );
+          })()}
           {apiary.description && <p className="text-sm text-stone-400 mt-1">{apiary.description}</p>}
         </div>
       </div>

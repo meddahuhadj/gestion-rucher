@@ -83,6 +83,13 @@
     "toggle": "Click beep",
     "hint": "Plays a short sound every time a button is pressed."
   },
+  "geo": {
+    "locate": "My location",
+    "refresh": "Refresh my location",
+    "openMap": "View on map",
+    "useMyLocation": "Use my location",
+    "error": "Location unavailable"
+  },
   "auth": {
     "login": "Login",
     "register": "Create account",
