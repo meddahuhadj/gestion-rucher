@@ -51,6 +51,11 @@
     "typePlaceholder": "Type a message…",
     "startFirst": "Start the assistant to type",
     "openFull": "Open full screen",
+    "tapToTalk": "Tap to talk",
+    "tapToStart": "Tap the circle to start",
+    "tapToStop": "Tap the circle to stop",
+    "gloveHint": "Glove mode on: just speak, the assistant is listening.",
+    "glove": { "listening": "Listening" },
     "privacyNote": "The assistant uses the Google Gemini API. Your microphone, camera and apiary data are sent during the session. The API key stays on this device.",
     "apiKeyTitle": "Gemini API key",
     "apiKeyHelp": "Enter your Gemini API key to use the assistant. You can get one for free at",
@@ -69,6 +74,10 @@
       "harvests": "Harvest saved — view production",
       "hives": "Hive added — view hives"
     }
+  },
+  "glove": {
+    "toggle": "Glove mode",
+    "hint": "Enlarges the whole interface and switches the assistant to a full-screen voice screen, for use with gloves at the hive."
   },
   "auth": {
     "login": "Login",
@@ -321,6 +330,7 @@
     "changePassword": "Change password",
     "currentPassword": "Current password",
     "newPassword": "New password",
+    "display": "Display",
     "data": "Data",
     "export": "Export",
     "import": "Import",

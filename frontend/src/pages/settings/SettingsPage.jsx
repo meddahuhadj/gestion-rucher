@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Settings as SettingsIcon, Download, Upload, KeyRound, Users, Copy, UserMinus, UserCog, LogOut } from 'lucide-react';
+import { Settings as SettingsIcon, Download, Upload, KeyRound, Users, Copy, UserMinus, UserCog, LogOut, Hand } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
+import { useGlove } from '../../context/GloveContext';
 import { authApi, backupApi } from '../../api';
 import { PageHeader } from '../../components/layout/PageHeader';
 import { Card, CardHeader, CardBody, Button, Input, Select, ConfirmDialog } from '../../components/ui';
@@ -11,6 +12,7 @@ export const SettingsPage = () => {
   const { t, i18n } = useTranslation();
   const { user, updateUser } = useAuth();
   const { active, members, myRole, removeMember, leaveWorkspace, transferOwner } = useWorkspace();
+  const { glove, toggle: toggleGlove } = useGlove();
   const [copied, setCopied] = useState(false);
   const [removeTarget, setRemoveTarget] = useState(null);
   const [confirmLeave, setConfirmLeave] = useState(false);
@@ -264,6 +266,33 @@ export const SettingsPage = () => {
             <Input type="number" label={t('settings.reminderDays')} value={reminderDays} onChange={(e) => setReminderDays(e.target.value)} />
           </div>
           <Button onClick={() => saveProfile(false)}>{t('common.save')}</Button>
+        </CardBody>
+      </Card>
+
+      <Card>
+        <CardHeader><h2 className="font-semibold text-stone-800 flex items-center gap-2 dark:text-stone-100"><Hand className="h-4 w-4" /> {t('settings.display')}</h2></CardHeader>
+        <CardBody>
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
+              <p className="text-sm font-medium text-stone-800 dark:text-stone-100">{t('glove.toggle')}</p>
+              <p className="text-xs text-stone-400">{t('glove.hint')}</p>
+            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={glove}
+              onClick={toggleGlove}
+              className={`relative h-7 w-12 shrink-0 rounded-full transition-colors ${
+                glove ? 'bg-honey-500' : 'bg-stone-300 dark:bg-stone-700'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform ${
+                  glove ? 'translate-x-5 rtl:-translate-x-5' : 'translate-x-0.5'
+                }`}
+              />
+            </button>
+          </div>
         </CardBody>
       </Card>
 

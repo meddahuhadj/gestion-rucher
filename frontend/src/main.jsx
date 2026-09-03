@@ -5,6 +5,7 @@ import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { WorkspaceProvider } from './context/WorkspaceContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { GloveProvider } from './context/GloveContext';
 import './i18n';
 import './index.css';
 
@@ -22,11 +23,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <AuthProvider>
-          <WorkspaceProvider>
-            <App />
-          </WorkspaceProvider>
-        </AuthProvider>
+        <GloveProvider>
+          <AuthProvider>
+            <WorkspaceProvider>
+              <App />
+            </WorkspaceProvider>
+          </AuthProvider>
+        </GloveProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

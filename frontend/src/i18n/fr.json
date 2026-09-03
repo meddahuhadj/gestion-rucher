@@ -51,6 +51,11 @@
     "typePlaceholder": "Écrire un message…",
     "startFirst": "Démarre l'assistant pour écrire",
     "openFull": "Ouvrir en plein écran",
+    "tapToTalk": "Appuyez pour parler",
+    "tapToStart": "Touchez le cercle pour démarrer",
+    "tapToStop": "Touchez le cercle pour arrêter",
+    "gloveHint": "Mode gants actif : parlez, l'assistant vous écoute.",
+    "glove": { "listening": "Je vous écoute" },
     "privacyNote": "L'assistant utilise l'API Google Gemini. Le micro, la caméra et vos données de rucher lui sont envoyés pendant la session. La clé API reste sur cet appareil.",
     "apiKeyTitle": "Clé API Gemini",
     "apiKeyHelp": "Saisis ta clé API Gemini pour utiliser l'assistant. Tu peux l'obtenir gratuitement sur",
@@ -69,6 +74,10 @@
       "harvests": "Récolte enregistrée — voir la production",
       "hives": "Ruche ajoutée — voir les ruches"
     }
+  },
+  "glove": {
+    "toggle": "Mode gants",
+    "hint": "Agrandit toute l'interface et passe l'assistant en écran vocal plein écran, pour une utilisation avec des gants au rucher."
   },
   "auth": {
     "login": "Connexion",
@@ -321,6 +330,7 @@
     "changePassword": "Changer le mot de passe",
     "currentPassword": "Mot de passe actuel",
     "newPassword": "Nouveau mot de passe",
+    "display": "Affichage",
     "data": "Données",
     "export": "Exporter",
     "import": "Importer",

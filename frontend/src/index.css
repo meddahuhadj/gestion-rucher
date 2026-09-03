@@ -26,3 +26,36 @@
     @apply bg-stone-300 rounded;
   }
 }
+
+/* --- Mode gants : agrandit l'interface pour une utilisation avec des gants --- */
+@layer base {
+  html.glove {
+    font-size: 18px;
+  }
+}
+
+@layer utilities {
+  html.glove button,
+  html.glove a[role="button"],
+  html.glove [role="button"],
+  html.glove input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  html.glove select,
+  html.glove textarea {
+    min-height: 2.9rem;
+  }
+  html.glove input,
+  html.glove select,
+  html.glove textarea {
+    font-size: 1rem;
+  }
+  /* Barre de navigation mobile : cibles plus grandes */
+  html.glove nav[data-glovenav] a {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 0.8125rem;
+  }
+  html.glove nav[data-glovenav] a svg {
+    height: 1.6rem;
+    width: 1.6rem;
+  }
+}

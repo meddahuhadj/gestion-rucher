@@ -3,11 +3,12 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LayoutDashboard, Warehouse, Hexagon, Search, ClipboardList, Calendar,
   Crown, Droplets, Wallet, BarChart3, Settings, LogOut, X, Menu, Bell,
-  Check, Sun, Moon, Bot } from 'lucide-react';
+  Check, Sun, Moon, Bot, Hand } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
 import { useTheme } from '../../context/ThemeContext';
+import { useGlove } from '../../context/GloveContext';
 import { LanguageSwitcher } from '../common/LanguageSwitcher';
 import { NotificationBell } from '../common/NotificationBell';
 import { Outlet } from 'react-router-dom';
@@ -42,6 +43,7 @@ export const Layout = () => {
   const { user, logout } = useAuth();
   const { workspaces, active, setActive } = useWorkspace();
   const { dark, toggle } = useTheme();
+  const { glove, toggle: toggleGlove } = useGlove();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   // Full-page forms (add / edit) : on mobile the bottom tab bar is hidden so it
@@ -161,6 +163,18 @@ export const Layout = () => {
           </div>
           <div className="flex items-center gap-2">
             <button
+              onClick={toggleGlove}
+              aria-label={t('glove.toggle')}
+              title={t('glove.toggle')}
+              className={`p-2 rounded-lg ${
+                glove
+                  ? 'bg-honey-100 text-honey-700 dark:bg-honey-900/40 dark:text-honey-300'
+                  : 'text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100'
+              }`}
+            >
+              <Hand className="h-5 w-5" />
+            </button>
+            <button
               onClick={toggle}
               aria-label="Toggle theme"
               className="p-2 rounded-lg text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100"
@@ -175,6 +189,18 @@ export const Layout = () => {
         <header className="hidden lg:flex sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-stone-100 px-6 py-3 items-center justify-between dark:bg-stone-900/80 dark:border-stone-800">
           <div className="w-56"><WorkspaceSwitcher /></div>
           <div className="flex items-center gap-3">
+            <button
+              onClick={toggleGlove}
+              aria-label={t('glove.toggle')}
+              title={t('glove.toggle')}
+              className={`p-2 rounded-lg ${
+                glove
+                  ? 'bg-honey-100 text-honey-700 dark:bg-honey-900/40 dark:text-honey-300'
+                  : 'text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100'
+              }`}
+            >
+              <Hand className="h-5 w-5" />
+            </button>
             <button
               onClick={toggle}
               aria-label="Toggle theme"
@@ -195,7 +221,7 @@ export const Layout = () => {
           <Outlet />
         </main>
 
-        <nav className={`${isFormPage ? 'hidden' : 'lg:hidden'} fixed bottom-0 inset-x-0 z-30 bg-white border-t border-stone-200 flex justify-around py-2 pb-[env(safe-area-inset-bottom)] dark:bg-stone-900 dark:border-stone-800`}>
+        <nav data-glovenav className={`${isFormPage ? 'hidden' : 'lg:hidden'} fixed bottom-0 inset-x-0 z-30 bg-white border-t border-stone-200 flex justify-around py-2 pb-[env(safe-area-inset-bottom)] dark:bg-stone-900 dark:border-stone-800`}>
           {MOBILE_NAV.map((item) => (
             <NavLink
               key={item.to}
