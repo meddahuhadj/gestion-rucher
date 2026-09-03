@@ -15,12 +15,15 @@ const buildSystemInstruction = ({ userName, workspaceName, currency, lang }) => 
     `Tu peux consulter les données du rucher (ruches, travaux, inspections, récoltes, finances) et en créer via les outils fournis.`,
     `Les ruches sont désignées par leur NUMÉRO. Avant de créer ou modifier une donnée, reformule brièvement ce que tu vas faire et attends la confirmation, sauf si la demande est déjà explicite et complète.`,
     `Après une action réussie, confirme en une phrase courte. Si un outil renvoie une erreur, explique-la simplement.`,
+    `Tu peux aussi piloter l'interface à la voix : navigate_to pour ouvrir une page du menu, un formulaire ("nouvelle ruche", "nouvelle inspection") ou revenir en arrière ; set_display pour changer la langue, le thème clair/sombre ou le mode gants. Exécute ces demandes de navigation immédiatement, sans confirmation.`,
     `Tu disposes aussi de la caméra quand l'utilisateur l'active : tu peux alors décrire un cadre, du couvain, une reine, etc.`,
   ].join(' ');
 };
 
-export function useAssistantSession({ userName, workspaceName, currency, lang, onChange } = {}) {
+export function useAssistantSession({ userName, workspaceName, currency, lang, onChange, ui } = {}) {
   const [hasApiKey, setHasApiKey] = useState(() => !!localStorage.getItem(API_KEY_STORAGE));
+  const uiRef = useRef(ui);
+  uiRef.current = ui;
   const [status, setStatus] = useState('IDLE');
   const [transcriptions, setTranscriptions] = useState([]);
   const [actions, setActions] = useState([]);
@@ -176,6 +179,13 @@ export function useAssistantSession({ userName, workspaceName, currency, lang, o
           { id: `${Date.now()}`, entity, ts: Date.now() },
         ]);
         onChange?.(entity);
+      },
+      ui: {
+        navigate: (path) => uiRef.current?.navigate?.(path),
+        goBack: () => uiRef.current?.goBack?.(),
+        setLanguage: (code) => uiRef.current?.setLanguage?.(code),
+        setTheme: (mode) => uiRef.current?.setTheme?.(mode),
+        setGloveMode: (on) => uiRef.current?.setGloveMode?.(on),
       },
     });
 

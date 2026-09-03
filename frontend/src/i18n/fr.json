@@ -47,7 +47,7 @@
     "changeKey": "Changer la clé API",
     "you": "Vous",
     "assistant": "Assistant",
-    "emptyHint": "Appuie sur Démarrer et parle : « Combien de ruches actives ? », « Ajoute un nourrissement pour la ruche 3 », « Récolte de 12 kg sur la ruche 7 »…",
+    "emptyHint": "Appuie sur Démarrer et parle : « Combien de ruches actives ? », « Ajoute un nourrissement pour la ruche 3 », « Ouvre les travaux », « Passe en mode sombre »…",
     "typePlaceholder": "Écrire un message…",
     "startFirst": "Démarre l'assistant pour écrire",
     "openFull": "Ouvrir en plein écran",

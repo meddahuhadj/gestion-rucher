@@ -158,11 +158,63 @@ export const functionDeclarations = [
       required: ['apiaryName'],
     },
   },
+  {
+    name: 'navigate_to',
+    description:
+      "Navigue dans l'application par la voix : ouvre une page du menu ou un formulaire, ou revient en arrière. À utiliser dès que l'utilisateur demande d'aller quelque part, d'ouvrir une section ou de cliquer sur un bouton de navigation.",
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        page: {
+          type: 'STRING',
+          enum: [
+            'dashboard', 'apiaries', 'hives', 'add_hive', 'inspections', 'add_inspection',
+            'tasks', 'calendar', 'queens', 'harvests', 'finances', 'statistics',
+            'notifications', 'settings', 'assistant', 'back',
+          ],
+          description:
+            "Destination : dashboard (tableau de bord), apiaries (ruchers), hives (ruches), add_hive (formulaire nouvelle ruche), inspections, add_inspection (nouvelle inspection), tasks (travaux), calendar (calendrier), queens (reines), harvests (production), finances, statistics, notifications, settings (paramètres), assistant, back (page précédente).",
+        },
+      },
+      required: ['page'],
+    },
+  },
+  {
+    name: 'set_display',
+    description:
+      "Change un réglage d'affichage : langue de l'interface, thème clair/sombre, ou mode gants (grande interface + assistant vocal plein écran).",
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        language: { type: 'STRING', enum: ['fr', 'ar', 'en'], description: 'Langue de l\'interface' },
+        theme: { type: 'STRING', enum: ['light', 'dark', 'toggle'], description: 'Thème' },
+        gloveMode: { type: 'BOOLEAN', description: 'Activer (true) ou désactiver (false) le mode gants' },
+      },
+    },
+  },
 ];
+
+const NAV_ROUTES = {
+  dashboard: '/',
+  apiaries: '/apiaries',
+  hives: '/hives',
+  add_hive: '/hives/new',
+  inspections: '/inspections',
+  add_inspection: '/inspections/new',
+  tasks: '/tasks',
+  calendar: '/calendar',
+  queens: '/queens',
+  harvests: '/harvests',
+  finances: '/finances',
+  statistics: '/statistics',
+  notifications: '/notifications',
+  settings: '/settings',
+  assistant: '/assistant',
+};
 
 // --- Handler ------------------------------------------------------------------
 
-export function createToolHandler({ onChange } = {}) {
+export function createToolHandler({ onChange, ui } = {}) {
   // small cache to resolve hive numbers / apiary names within a session
   let hivesCache = null;
   let apiariesCache = null;
@@ -394,6 +446,35 @@ export function createToolHandler({ onChange } = {}) {
         hivesCache = null;
         onChange?.('hives');
         return { ok: true, created: 'hive', number: hive.number, id: hive.id };
+      }
+
+      case 'navigate_to': {
+        if (args.page === 'back') {
+          ui?.goBack?.();
+          return { ok: true, navigated: 'back' };
+        }
+        const path = NAV_ROUTES[args.page];
+        if (!path) return { error: `Page inconnue : ${args.page}` };
+        ui?.navigate?.(path);
+        return { ok: true, navigated: args.page, path };
+      }
+
+      case 'set_display': {
+        const applied = [];
+        if (args.language && ui?.setLanguage) {
+          ui.setLanguage(args.language);
+          applied.push(`langue = ${args.language}`);
+        }
+        if (args.theme && ui?.setTheme) {
+          ui.setTheme(args.theme);
+          applied.push(`thème = ${args.theme}`);
+        }
+        if (typeof args.gloveMode === 'boolean' && ui?.setGloveMode) {
+          ui.setGloveMode(args.gloveMode);
+          applied.push(`mode gants = ${args.gloveMode ? 'activé' : 'désactivé'}`);
+        }
+        if (!applied.length) return { error: 'Aucun réglage fourni.' };
+        return { ok: true, applied };
       }
 
       default:

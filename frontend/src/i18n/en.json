@@ -47,7 +47,7 @@
     "changeKey": "Change API key",
     "you": "You",
     "assistant": "Assistant",
-    "emptyHint": "Tap Start and speak: \"How many active hives?\", \"Add feeding for hive 3\", \"Log a 12 kg harvest for hive 7\"…",
+    "emptyHint": "Tap Start and speak: \"How many active hives?\", \"Add feeding for hive 3\", \"Open tasks\", \"Switch to dark mode\"…",
     "typePlaceholder": "Type a message…",
     "startFirst": "Start the assistant to type",
     "openFull": "Open full screen",
